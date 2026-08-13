@@ -1,12 +1,190 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gabriela de Araújo Reis</title>
+    <title>Gerenciador de Tarefas Acadêmicas</title>
 </head>
+
 <body>
-    <h1>Gabriela de Araújo Reis</h1>
-    <p>Acadêmica de Ciência da Computação.</p>
+
+    <header>
+        <h1>Gerenciador de Tarefas Acadêmicas</h1>
+    </header>
+
+    <main>
+
+        <section aria-labelledby="titulo-busca">
+            <h2 id="titulo-busca">Busca e filtros</h2>
+
+            <form>
+                <div>
+                    <label for="busca">Buscar tarefa por título:</label>
+                    <input type="search" id="busca" name="busca">
+                </div>
+
+                <fieldset>
+                    <legend>Filtrar por status</legend>
+
+                    <label for="status-todos">
+                        <input type="radio" id="status-todos" name="status" value="todos" checked>
+                        Todos
+                    </label>
+
+                    <label for="status-fazer">
+                        <input type="radio" id="status-fazer" name="status" value="a-fazer">
+                        A fazer
+                    </label>
+
+                    <label for="status-andamento">
+                        <input type="radio" id="status-andamento" name="status" value="em-andamento">
+                        Em andamento
+                    </label>
+
+                    <label for="status-revisao">
+                        <input type="radio" id="status-revisao" name="status" value="em-revisao">
+                        Em revisão
+                    </label>
+
+                    <label for="status-concluida">
+                        <input type="radio" id="status-concluida" name="status" value="concluida">
+                        Concluída
+                    </label>
+                </fieldset>
+
+                <div>
+                    <label for="prioridade">Filtrar por prioridade:</label>
+
+                    <select id="prioridade" name="prioridade">
+                        <option value="todas">Todas</option>
+                        <option value="baixa">Baixa</option>
+                        <option value="media">Média</option>
+                        <option value="alta">Alta</option>
+                    </select>
+                </div>
+            </form>
+        </section>
+
+        <section aria-labelledby="titulo-quadro">
+            <h2 id="titulo-quadro">Quadro de tarefas</h2>
+
+            <!-- A FAZER -->
+            <section aria-labelledby="titulo-a-fazer">
+                <h2 id="titulo-a-fazer">A fazer</h2>
+
+                <ul>
+                    <li>
+                        <article>
+                            <h3>Modelar banco de dados</h3>
+                            <p><strong>Projeto:</strong> Sistema Acadêmico</p>
+                            <p><strong>Responsável:</strong> Gabriela</p>
+                            <p><strong>Prazo:</strong> 15/08/2026</p>
+                            <p><strong>Prioridade:</strong> Alta</p>
+                        </article>
+                    </li>
+
+                    <li>
+                        <article>
+                            <h3>Estudar HTML semântico</h3>
+                            <p><strong>Projeto:</strong> Desenvolvimento Frontend</p>
+                            <p><strong>Responsável:</strong> Gabriela</p>
+                            <p><strong>Prazo:</strong> 16/08/2026</p>
+                            <p><strong>Prioridade:</strong> Média</p>
+                        </article>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- EM ANDAMENTO -->
+            <section aria-labelledby="titulo-em-andamento">
+                <h2 id="titulo-em-andamento">Em andamento</h2>
+
+                <ul>
+                    <li>
+                        <article>
+                            <h3>Implementar estrutura HTML</h3>
+                            <p><strong>Projeto:</strong> Desenvolvimento Frontend</p>
+                            <p><strong>Responsável:</strong> Gabriela</p>
+                            <p><strong>Prazo:</strong> 18/08/2026</p>
+                            <p><strong>Prioridade:</strong> Alta</p>
+                        </article>
+                    </li>
+
+                    <li>
+                        <article>
+                            <h3>Revisar conceitos de HTTP</h3>
+                            <p><strong>Projeto:</strong> Estudos Web</p>
+                            <p><strong>Responsável:</strong> Gabriela</p>
+                            <p><strong>Prazo:</strong> 19/08/2026</p>
+                            <p><strong>Prioridade:</strong> Baixa</p>
+                        </article>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- EM REVISÃO -->
+            <section aria-labelledby="titulo-em-revisao">
+                <h2 id="titulo-em-revisao">Em revisão</h2>
+
+                <ul>
+                    <li>
+                        <article>
+                            <h3>Revisar formulário acadêmico</h3>
+                            <p><strong>Projeto:</strong> Portal do Aluno</p>
+                            <p><strong>Responsável:</strong> Gabriela</p>
+                            <p><strong>Prazo:</strong> 20/08/2026</p>
+                            <p><strong>Prioridade:</strong> Média</p>
+                        </article>
+                    </li>
+
+                    <li>
+                        <article>
+                            <h3>Verificar acessibilidade</h3>
+                            <p><strong>Projeto:</strong> Desenvolvimento Frontend</p>
+                            <p><strong>Responsável:</strong> Gabriela</p>
+                            <p><strong>Prazo:</strong> 21/08/2026</p>
+                            <p><strong>Prioridade:</strong> Alta</p>
+                        </article>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- CONCLUÍDA -->
+            <section aria-labelledby="titulo-concluida">
+                <h2 id="titulo-concluida">Concluída</h2>
+
+                <ul>
+                    <li>
+                        <article>
+                            <h3>Criar repositório no GitHub</h3>
+                            <p><strong>Projeto:</strong> Desenvolvimento Frontend</p>
+                            <p><strong>Responsável:</strong> Gabriela</p>
+                            <p><strong>Prazo:</strong> 12/08/2026</p>
+                            <p><strong>Prioridade:</strong> Alta</p>
+                        </article>
+                    </li>
+
+                    <li>
+                        <article>
+                            <h3>Configurar ambiente de desenvolvimento</h3>
+                            <p><strong>Projeto:</strong> Desenvolvimento Frontend</p>
+                            <p><strong>Responsável:</strong> Gabriela</p>
+                            <p><strong>Prazo:</strong> 13/08/2026</p>
+                            <p><strong>Prioridade:</strong> Baixa</p>
+                        </article>
+                    </li>
+                </ul>
+            </section>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Gabriela de Araújo Reis — Desenvolvimento Frontend</p>
+    </footer>
+
 </body>
+
 </html>
