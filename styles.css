@@ -5,13 +5,24 @@
     --color-muted: #527078;
     --color-primary: #087f8c;
     --color-secondary: #2563eb;
-    --color-accent: #10b981;
     --color-border: #c9e5e2;
+
+    --status-todo: #087f8c;
+    --status-progress: #2563eb;
+    --status-review: #0e7490;
+    --status-done: #10b981;
+
+    --space-small: 0.5rem;
+    --space-medium: 1rem;
+    --space-large: 1.5rem;
+
     --radius: 1rem;
     --shadow: 0 0.45rem 1.4rem rgb(8 127 140 / 0.11);
 }
 
-* {
+*,
+*::before,
+*::after {
     box-sizing: border-box;
 }
 
@@ -22,18 +33,16 @@ html {
 body {
     margin: 0;
     color: var(--color-text);
-    background:
-        radial-gradient(circle at top right, rgb(37 99 235 / 0.09), transparent 26rem),
-        var(--color-background);
+    background: var(--color-background);
     font-family: Arial, Helvetica, sans-serif;
     line-height: 1.5;
 }
 
 body > header,
 body > footer {
-    padding: 1.25rem;
+    padding: var(--space-medium);
     color: #ffffff;
-    background: linear-gradient(135deg, #073b4c, #087f8c 55%, #2563eb);
+    background: var(--color-primary);
 }
 
 h1,
@@ -50,30 +59,30 @@ h1 {
 }
 
 main {
-    padding: 1rem;
+    padding: var(--space-medium);
 }
 
 .filters-panel,
 .board-section {
-    margin-bottom: 1.5rem;
+    margin-bottom: var(--space-large);
 }
 
 .filters-grid {
     margin: 0;
-    padding: 1rem;
+    padding: var(--space-medium);
     background: var(--color-surface);
-    border: 0.0625rem solid #b9dfdc;
+    border: 0.0625rem solid var(--color-border);
     border-radius: var(--radius);
     box-shadow: var(--shadow);
 }
 
 .form-field {
-    margin-bottom: 1rem;
+    margin-bottom: var(--space-medium);
 }
 
 .form-field label {
     display: block;
-    margin-bottom: 0.35rem;
+    margin-bottom: var(--space-small);
     font-weight: 700;
 }
 
@@ -86,15 +95,15 @@ button {
     min-height: 2.75rem;
     padding: 0.65rem 0.75rem;
     color: inherit;
-    background: #ffffff;
-    border: 0.0625rem solid #aeb6c6;
+    background: var(--color-surface);
+    border: 0.0625rem solid var(--color-border);
     border-radius: 0.45rem;
     font: inherit;
 }
 
 button {
     color: #ffffff;
-    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    background: var(--color-primary);
     border-color: transparent;
     cursor: pointer;
     font-weight: 700;
@@ -102,7 +111,7 @@ button {
 
 button[type="reset"] {
     color: var(--color-primary);
-    background: #ffffff;
+    background: var(--color-surface);
     border-color: var(--color-primary);
 }
 
@@ -120,36 +129,47 @@ button:hover {
 .form-actions {
     display: flex;
     flex-direction: column;
-    gap: 0.6rem;
+    gap: var(--space-small);
 }
 
 .task-board {
     display: grid;
-    /* auto-fit empilha as colunas quando não há espaço, sem depender de media query. */
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
-    gap: 1.15rem;
+    gap: var(--space-medium);
 }
 
 .status-column {
     min-width: 0;
     display: flex;
     flex-direction: column;
-    padding: 1rem;
-    background: linear-gradient(180deg, #dff3f0, #edf9f7);
-    border-top: 0.3rem solid var(--color-primary);
+    padding: var(--space-medium);
+    background: var(--color-surface);
+    border-top: 0.3rem solid var(--status-todo);
     border-radius: var(--radius);
 }
 
-.status-progress { border-top-color: #2563eb; }
-.status-review { border-top-color: #0e7490; }
-.status-done { border-top-color: #10b981; }
+.status-todo {
+    border-top-color: var(--status-todo);
+}
+
+.status-progress {
+    border-top-color: var(--status-progress);
+}
+
+.status-review {
+    border-top-color: var(--status-review);
+}
+
+.status-done {
+    border-top-color: var(--status-done);
+}
 
 .task-list {
     min-width: 0;
     display: flex;
     flex: 1;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: var(--space-small);
     margin: 0;
     padding: 0;
     list-style: none;
@@ -166,26 +186,19 @@ button:hover {
     display: flex;
     flex: 1;
     flex-direction: column;
-    padding: 1rem;
+    padding: var(--space-medium);
     background: var(--color-surface);
     border: 0.0625rem solid var(--color-border);
-    border-inline-start: 0.25rem solid rgb(8 127 140 / 0.55);
     border-radius: 0.6rem;
     box-shadow: var(--shadow);
-    transition: transform 160ms ease, box-shadow 160ms ease;
-}
-
-.task-card:hover {
-    transform: translateY(-0.15rem);
-    box-shadow: 0 0.7rem 1.7rem rgb(8 127 140 / 0.16);
 }
 
 .task-card-header {
     min-width: 0;
     display: flex;
     align-items: flex-start;
-    gap: 0.65rem;
-    margin-bottom: 0.85rem;
+    gap: var(--space-small);
+    margin-bottom: var(--space-small);
 }
 
 .task-card h4 {
@@ -199,7 +212,7 @@ button:hover {
 
 .task-card p {
     overflow-wrap: anywhere;
-    margin-bottom: 0.45rem;
+    margin-bottom: var(--space-small);
     color: var(--color-muted);
     font-size: 0.9rem;
 }
@@ -231,27 +244,24 @@ button:hover {
 
 .deadline {
     margin-top: auto;
-    padding-top: 0.65rem;
+    padding-top: var(--space-small);
 }
 
 body > footer p {
     margin-bottom: 0;
 }
 
-/*
- * Ponto de quebra em 48rem: a partir desta largura os três filtros cabem
- * lado a lado sem comprimir os rótulos nem criar rolagem horizontal.
- */
+/* Em 48rem os filtros já cabem lado a lado sem apertar o conteúdo. */
 @media (min-width: 48rem) {
     main {
-        padding: 1.5rem;
+        padding: var(--space-large);
     }
 
     .filters-grid {
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
         align-items: end;
-        gap: 1rem;
+        gap: var(--space-medium);
     }
 
     .filters-grid legend,
@@ -270,16 +280,5 @@ body > footer p {
 
     .form-actions button {
         width: auto;
-    }
-}
-
-/* Remove animações para quem prefere menos movimento na interface. */
-@media (prefers-reduced-motion: reduce) {
-    .task-card {
-        transition: none;
-    }
-
-    .task-card:hover {
-        transform: none;
     }
 }
