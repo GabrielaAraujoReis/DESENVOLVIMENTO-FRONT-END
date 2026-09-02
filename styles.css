@@ -1,23 +1,29 @@
 :root {
-    --color-background: #edf9f7;
-    --color-surface: #ffffff;
-    --color-text: #12343b;
-    --color-muted: #527078;
-    --color-primary: #087f8c;
-    --color-secondary: #2563eb;
-    --color-border: #c9e5e2;
+    --color-background: #f3efe6;
+    --color-surface: #fffaf0;
+    --color-text: #2f2a24;
+    --color-muted: #6b6258;
+    --color-border: #c9bda9;
 
-    --status-todo: #087f8c;
-    --status-progress: #2563eb;
-    --status-review: #0e7490;
-    --status-done: #10b981;
+    --status-todo: #b84a3a;
+    --status-progress: #b47d16;
+    --status-review: #6657b8;
+    --status-done: #3f7553;
+
+    --priority-high-bg: #f2d1ca;
+    --priority-high-text: #7a281a;
+
+    --priority-medium-bg: #f1dfae;
+    --priority-medium-text: #654700;
+
+    --priority-low-bg: #d9e6dc;
+    --priority-low-text: #294f36;
 
     --space-small: 0.5rem;
     --space-medium: 1rem;
     --space-large: 1.5rem;
 
-    --radius: 1rem;
-    --shadow: 0 0.45rem 1.4rem rgb(8 127 140 / 0.11);
+    --radius: 0.45rem;
 }
 
 *,
@@ -40,9 +46,9 @@ body {
 
 body > header,
 body > footer {
-    padding: var(--space-medium);
-    color: #ffffff;
-    background: var(--color-primary);
+    padding: var(--space-large);
+    background: #2f2a24;
+    color: #fffaf0;
 }
 
 h1,
@@ -55,7 +61,20 @@ p {
 
 h1 {
     margin-bottom: 0;
-    font-size: clamp(1.65rem, 1.2rem + 3vw, 3rem);
+    font-size: clamp(1.8rem, 1.3rem + 3vw, 3.4rem);
+    line-height: 1;
+    letter-spacing: -0.04em;
+}
+
+h2 {
+    margin-bottom: var(--space-medium);
+}
+
+h3 {
+    margin-bottom: 0;
+    font-size: 1.05rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
 }
 
 main {
@@ -70,10 +89,9 @@ main {
 .filters-grid {
     margin: 0;
     padding: var(--space-medium);
-    background: var(--color-surface);
-    border: 0.0625rem solid var(--color-border);
+    border: 0.1rem solid var(--color-border);
     border-radius: var(--radius);
-    box-shadow: var(--shadow);
+    background: var(--color-surface);
 }
 
 .form-field {
@@ -82,7 +100,7 @@ main {
 
 .form-field label {
     display: block;
-    margin-bottom: var(--space-small);
+    margin-bottom: 0.35rem;
     font-weight: 700;
 }
 
@@ -94,36 +112,35 @@ button {
     width: 100%;
     min-height: 2.75rem;
     padding: 0.65rem 0.75rem;
+    border: 0.1rem solid var(--color-border);
+    border-radius: var(--radius);
+    background: #fffdf8;
     color: inherit;
-    background: var(--color-surface);
-    border: 0.0625rem solid var(--color-border);
-    border-radius: 0.45rem;
     font: inherit;
 }
 
 button {
-    color: #ffffff;
-    background: var(--color-primary);
-    border-color: transparent;
+    border-color: #2f2a24;
+    background: #2f2a24;
+    color: #fffaf0;
     cursor: pointer;
     font-weight: 700;
 }
 
 button[type="reset"] {
-    color: var(--color-primary);
-    background: var(--color-surface);
-    border-color: var(--color-primary);
+    background: transparent;
+    color: var(--color-text);
 }
 
 input:focus-visible,
 select:focus-visible,
 button:focus-visible {
-    outline: 0.2rem solid #fbbf24;
+    outline: 0.2rem solid #7c5c00;
     outline-offset: 0.15rem;
 }
 
 button:hover {
-    filter: brightness(0.92);
+    filter: brightness(1.12);
 }
 
 .form-actions {
@@ -143,9 +160,10 @@ button:hover {
     display: flex;
     flex-direction: column;
     padding: var(--space-medium);
-    background: var(--color-surface);
-    border-top: 0.3rem solid var(--status-todo);
+    border: 0.1rem solid var(--color-border);
+    border-top-width: 0.4rem;
     border-radius: var(--radius);
+    background: var(--color-surface);
 }
 
 .status-todo {
@@ -162,6 +180,53 @@ button:hover {
 
 .status-done {
     border-top-color: var(--status-done);
+}
+
+.status-title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-small);
+    margin-bottom: 0.4rem;
+}
+
+.status-percent {
+    flex: 0 0 auto;
+    font-size: 0.9rem;
+    font-weight: 800;
+}
+
+.status-progressbar {
+    width: 100%;
+    height: 0.75rem;
+    margin-bottom: var(--space-medium);
+    overflow: hidden;
+    border: 0.1rem solid #9f927f;
+    background: #ddd4c5;
+}
+
+.status-progressbar-fill {
+    height: 100%;
+}
+
+.status-todo .status-progressbar-fill {
+    width: 0%;
+    background: var(--status-todo);
+}
+
+.status-progress .status-progressbar-fill {
+    width: 40%;
+    background: var(--status-progress);
+}
+
+.status-review .status-progressbar-fill {
+    width: 75%;
+    background: var(--status-review);
+}
+
+.status-done .status-progressbar-fill {
+    width: 100%;
+    background: var(--status-done);
 }
 
 .task-list {
@@ -187,10 +252,10 @@ button:hover {
     flex: 1;
     flex-direction: column;
     padding: var(--space-medium);
-    background: var(--color-surface);
-    border: 0.0625rem solid var(--color-border);
-    border-radius: 0.6rem;
-    box-shadow: var(--shadow);
+    border: 0.1rem solid var(--color-border);
+    border-radius: var(--radius);
+    background: #fffdf8;
+    box-shadow: 0.18rem 0.18rem 0 #9b8d7c;
 }
 
 .task-card-header {
@@ -198,21 +263,21 @@ button:hover {
     display: flex;
     align-items: flex-start;
     gap: var(--space-small);
-    margin-bottom: var(--space-small);
+    margin-bottom: 0.85rem;
 }
 
 .task-card h4 {
     min-width: 0;
     flex: 1;
-    overflow: hidden;
     margin-bottom: 0;
+    overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
 .task-card p {
+    margin-bottom: 0.45rem;
     overflow-wrap: anywhere;
-    margin-bottom: var(--space-small);
     color: var(--color-muted);
     font-size: 0.9rem;
 }
@@ -221,37 +286,38 @@ button:hover {
     flex: 0 0 auto;
     display: inline-block;
     min-height: 1.5rem;
-    padding: 0.2rem 0.55rem;
-    border-radius: 999rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 0.25rem;
     font-size: 0.75rem;
     font-weight: 700;
 }
 
 .priority-high {
-    color: #8c1c13;
-    background: #ffe0dc;
+    background: var(--priority-high-bg);
+    color: var(--priority-high-text);
 }
 
 .priority-medium {
-    color: #765000;
-    background: #fff0bd;
+    background: var(--priority-medium-bg);
+    color: var(--priority-medium-text);
 }
 
 .priority-low {
-    color: #176b45;
-    background: #d8f5e8;
+    background: var(--priority-low-bg);
+    color: var(--priority-low-text);
 }
 
 .deadline {
     margin-top: auto;
     padding-top: var(--space-small);
+    border-top: 0.1rem dashed var(--color-border);
 }
 
 body > footer p {
     margin-bottom: 0;
 }
 
-/* Em 48rem os filtros já cabem lado a lado sem apertar o conteúdo. */
+/* Em 48rem os três filtros já cabem lado a lado sem apertar o conteúdo. */
 @media (min-width: 48rem) {
     main {
         padding: var(--space-large);
