@@ -1,19 +1,25 @@
-import { tarefas } from "./dados.js";
+import { carregarTarefas } from "./api.js";
 
 import {
     renderizarTarefas,
     instalarEventosDoQuadro
 } from "./renderizacao.js";
 
-function iniciarAplicacao() {
+async function iniciarAplicacao() {
     const quadro = document.querySelector("[data-quadro]");
 
     if (!quadro) {
         throw new Error("Quadro de tarefas não encontrado.");
     }
 
-    renderizarTarefas(tarefas, quadro);
-    instalarEventosDoQuadro(quadro, tarefas);
+    try {
+        const tarefas = await carregarTarefas();
+
+        renderizarTarefas(tarefas, quadro);
+        instalarEventosDoQuadro(quadro, tarefas);
+    } catch (erro) {
+        console.error("Erro ao carregar tarefas:", erro);
+    }
 }
 
 iniciarAplicacao();
