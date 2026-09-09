@@ -2,6 +2,16 @@ import { carregarTarefas } from "./api.js";
 import { renderizarEstado } from "./estados.js";
 import { instalarEventosDoQuadro } from "./renderizacao.js";
 
+const estado = {
+    tarefas: [],
+    busca: "",
+    status: "todos",
+    prioridade: "todas",
+    ordenacao: "prazo-asc",
+    carregamento: "carregando",
+    erro: null
+};
+
 async function iniciarAplicacao() {
     const quadro = document.querySelector("[data-quadro]");
 
