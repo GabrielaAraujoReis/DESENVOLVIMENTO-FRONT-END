@@ -57,12 +57,27 @@ function renderizarAplicacao(estado) {
 
     const tarefasVisiveis = selecionarTarefas(estado);
 
+    if (tarefasVisiveis.length === 0) {
+    renderizarEstado("resultado-vazio");
+    return;
+}
+
     renderizarEstado("sucesso", tarefasVisiveis);
+
+    const painelEstado = document.querySelector("[data-estado]");
+
+    if (painelEstado) {
+        painelEstado.textContent =
+            `${tarefasVisiveis.length} de ${estado.tarefas.length} tarefa(s).`;
+    }
 }
 
 async function iniciarAplicacao() {
     const quadro = document.querySelector("[data-quadro]");
     const campoBusca = document.querySelector("#busca-titulo");
+    const filtroStatus = document.querySelector("#filtro-status");
+    const filtroPrioridade = document.querySelector("#filtro-prioridade");
+    const formulario = document.querySelector(".filters-panel form");
 
     if (!quadro) {
         throw new Error("Quadro de tarefas não encontrado.");
@@ -88,6 +103,37 @@ async function iniciarAplicacao() {
             campoBusca.addEventListener("input", (evento) => {
                 estado.busca = evento.currentTarget.value;
                 renderizarAplicacao(estado);
+            });
+        }
+
+        if (filtroStatus) {
+            filtroStatus.addEventListener("change", (evento) => {
+                estado.status = evento.currentTarget.value;
+                renderizarAplicacao(estado);
+            });
+        }
+
+        if (filtroPrioridade) {
+            filtroPrioridade.addEventListener("change", (evento) => {
+                estado.prioridade = evento.currentTarget.value;
+                renderizarAplicacao(estado);
+            });
+        }
+
+        if (formulario) {
+            formulario.addEventListener("submit", (evento) => {
+                evento.preventDefault();
+            });
+
+            formulario.addEventListener("reset", () => {
+                estado.busca = "";
+                estado.status = "todos";
+                estado.prioridade = "todas";
+                estado.ordenacao = "prazo-asc";
+
+                setTimeout(() => {
+                    renderizarAplicacao(estado);
+                }, 0);
             });
         }
     } catch (erro) {

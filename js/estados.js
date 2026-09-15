@@ -20,27 +20,24 @@ export function renderizarEstado(estado, dados) {
 
     if (estado === "sucesso") {
         renderizarTarefas(dados, quadro);
-
-        painelEstado.textContent =
-            `${dados.length} tarefa(s) carregada(s).`;
-
         return;
     }
 
     if (estado === "vazio") {
         renderizarTarefas([], quadro);
+        painelEstado.textContent = "Nenhuma tarefa foi cadastrada.";
+        return;
+    }
 
+    if (estado === "resultado-vazio") {
+        renderizarTarefas([], quadro);
         painelEstado.textContent =
-            "Nenhuma tarefa disponível no momento.";
-
+            "Nenhuma tarefa encontrada. Altere ou limpe os critérios.";
         return;
     }
 
     if (estado === "erro") {
         renderizarTarefas([], quadro);
-
         painelEstado.textContent = dados;
-
-        return;
     }
 }
