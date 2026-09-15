@@ -25,7 +25,8 @@ export function renderizarEstado(estado, dados) {
 
     if (estado === "vazio") {
         renderizarTarefas([], quadro);
-        painelEstado.textContent = "Nenhuma tarefa foi cadastrada.";
+        painelEstado.textContent =
+            "Nenhuma tarefa foi cadastrada.";
         return;
     }
 

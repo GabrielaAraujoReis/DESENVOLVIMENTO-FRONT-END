@@ -22,7 +22,11 @@
 
                     <p class="form-field search-field">
                         <label for="busca-titulo">Buscar pelo título da tarefa:</label>
-                        <input type="search" id="busca-titulo" name="busca-titulo">
+                        <input
+                            type="search"
+                            id="busca-titulo"
+                            name="busca-titulo"
+                        >
                     </p>
 
                     <p class="form-field">
@@ -40,11 +44,29 @@
                     <p class="form-field">
                         <label for="filtro-prioridade">Filtrar por prioridade:</label>
 
-                        <select id="filtro-prioridade" name="filtro-prioridade">
-                            <option value="todas">Todas as prioridades</option>
+                        <select
+                            id="filtro-prioridade"
+                            name="filtro-prioridade"
+                        >
+                            <option value="todas">
+                                Todas as prioridades
+                            </option>
                             <option value="baixa">Baixa</option>
                             <option value="media">Média</option>
                             <option value="alta">Alta</option>
+                        </select>
+                    </p>
+
+                    <p class="form-field">
+                        <label for="ordenacao">Ordenar por prazo:</label>
+
+                        <select id="ordenacao" name="ordenacao">
+                            <option value="prazo-asc">
+                                Prazo mais próximo
+                            </option>
+                            <option value="prazo-desc">
+                                Prazo mais distante
+                            </option>
                         </select>
                     </p>
 

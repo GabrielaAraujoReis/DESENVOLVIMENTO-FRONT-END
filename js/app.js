@@ -58,9 +58,9 @@ function renderizarAplicacao(estado) {
     const tarefasVisiveis = selecionarTarefas(estado);
 
     if (tarefasVisiveis.length === 0) {
-    renderizarEstado("resultado-vazio");
-    return;
-}
+        renderizarEstado("resultado-vazio");
+        return;
+    }
 
     renderizarEstado("sucesso", tarefasVisiveis);
 
@@ -76,7 +76,9 @@ async function iniciarAplicacao() {
     const quadro = document.querySelector("[data-quadro]");
     const campoBusca = document.querySelector("#busca-titulo");
     const filtroStatus = document.querySelector("#filtro-status");
-    const filtroPrioridade = document.querySelector("#filtro-prioridade");
+    const filtroPrioridade =
+        document.querySelector("#filtro-prioridade");
+    const campoOrdenacao = document.querySelector("#ordenacao");
     const formulario = document.querySelector(".filters-panel form");
 
     if (!quadro) {
@@ -114,8 +116,20 @@ async function iniciarAplicacao() {
         }
 
         if (filtroPrioridade) {
-            filtroPrioridade.addEventListener("change", (evento) => {
-                estado.prioridade = evento.currentTarget.value;
+            filtroPrioridade.addEventListener(
+                "change",
+                (evento) => {
+                    estado.prioridade =
+                        evento.currentTarget.value;
+
+                    renderizarAplicacao(estado);
+                }
+            );
+        }
+
+        if (campoOrdenacao) {
+            campoOrdenacao.addEventListener("change", (evento) => {
+                estado.ordenacao = evento.currentTarget.value;
                 renderizarAplicacao(estado);
             });
         }
@@ -140,7 +154,8 @@ async function iniciarAplicacao() {
         estado.carregamento = "erro";
 
         if (erro.name === "TypeError") {
-            estado.erro = "Não foi possível conectar à rede.";
+            estado.erro =
+                "Não foi possível conectar à rede.";
         } else if (erro.name === "SyntaxError") {
             estado.erro =
                 "Os dados recebidos estão em um formato inválido.";
