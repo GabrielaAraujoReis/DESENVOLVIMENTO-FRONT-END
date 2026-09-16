@@ -207,9 +207,9 @@ button:hover {
 .status-percent {
     flex: 0 0 auto;
     padding: 0.18rem 0.55rem;
+    border: 0.08rem solid var(--color-border);
     border-radius: 999px;
     background: #f4ede2;
-    border: 0.08rem solid var(--color-border);
     font-size: 0.82rem;
     font-weight: 800;
 }
@@ -236,22 +236,38 @@ button:hover {
 
 .status-todo .status-progressbar-fill {
     width: 0%;
-    background: linear-gradient(90deg, #cf6759, var(--status-todo));
+    background: linear-gradient(
+        90deg,
+        #cf6759,
+        var(--status-todo)
+    );
 }
 
 .status-progress .status-progressbar-fill {
     width: 40%;
-    background: linear-gradient(90deg, #d79c2f, var(--status-progress));
+    background: linear-gradient(
+        90deg,
+        #d79c2f,
+        var(--status-progress)
+    );
 }
 
 .status-review .status-progressbar-fill {
     width: 75%;
-    background: linear-gradient(90deg, #8575db, var(--status-review));
+    background: linear-gradient(
+        90deg,
+        #8575db,
+        var(--status-review)
+    );
 }
 
 .status-done .status-progressbar-fill {
     width: 100%;
-    background: linear-gradient(90deg, #5b9b70, var(--status-done));
+    background: linear-gradient(
+        90deg,
+        #5b9b70,
+        var(--status-done)
+    );
 }
 
 .task-list {
@@ -320,30 +336,34 @@ button:hover {
     flex: 0 0 auto;
     display: inline-flex;
     align-items: center;
+
     min-height: 1.6rem;
-    padding: 0.25rem 0.55rem;
+    padding: 0.25rem 0.6rem;
+
     border: 0.1rem solid transparent;
     border-radius: 999px;
+
     font-size: 0.72rem;
     font-weight: 800;
     letter-spacing: 0.04em;
     text-transform: uppercase;
+
     box-shadow: 0 1px 2px rgba(47, 42, 36, 0.08);
 }
 
-.priority-high {
+.priority-alta {
     background: #f3c9c0;
     border-color: #d78676;
     color: #6f2115;
 }
 
-.priority-medium {
+.priority-media {
     background: #f2dda2;
     border-color: #cba94e;
     color: #594000;
 }
 
-.priority-low {
+.priority-baixa {
     background: #cee2d3;
     border-color: #7eae8c;
     color: #21482e;
@@ -355,6 +375,7 @@ button:hover {
     border-top: 0.1rem dashed var(--color-border);
 }
 
+
 .task-card button {
     transition:
         transform 0.2s ease,
@@ -364,6 +385,13 @@ button:hover {
 .task-card button:hover {
     transform: scale(1.03);
     opacity: 0.9;
+}
+
+.task-description {
+    margin-bottom: var(--space-medium);
+    color: var(--color-muted);
+    font-size: 0.88rem;
+    line-height: 1.45;
 }
 
 body > footer p {
@@ -400,4 +428,6 @@ body > footer p {
     .form-actions button {
         width: auto;
     }
+
+    
 }

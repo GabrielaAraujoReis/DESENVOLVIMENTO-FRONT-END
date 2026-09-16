@@ -3,6 +3,7 @@
         {
             "id": "t1",
             "titulo": "Criar estrutura da página inicial",
+            "descricao": "Montar a estrutura principal da página utilizando elementos HTML adequados.",
             "status": "a-fazer",
             "prioridade": "alta",
             "prazo": "2026-09-05"
@@ -10,6 +11,7 @@
         {
             "id": "t2",
             "titulo": "Pesquisar elementos semânticos do HTML",
+            "descricao": "Revisar elementos semânticos e entender quando utilizar cada um deles.",
             "status": "a-fazer",
             "prioridade": "media",
             "prazo": "2026-09-06"
@@ -17,6 +19,7 @@
         {
             "id": "t3",
             "titulo": "Elaborar cartões de tarefas",
+            "descricao": "Criar os cartões responsáveis por apresentar as informações de cada tarefa.",
             "status": "em-andamento",
             "prioridade": "alta",
             "prazo": "2026-09-07"
@@ -24,6 +27,7 @@
         {
             "id": "t4",
             "titulo": "Revisar conceitos de acessibilidade",
+            "descricao": "Conferir práticas de acessibilidade aplicadas aos elementos da interface.",
             "status": "em-andamento",
             "prioridade": "media",
             "prazo": "2026-09-07"
@@ -31,6 +35,7 @@
         {
             "id": "t5",
             "titulo": "Validar hierarquia de cabeçalhos",
+            "descricao": "Verificar se os títulos seguem uma hierarquia lógica e consistente na página.",
             "status": "em-revisao",
             "prioridade": "alta",
             "prazo": "2026-09-08"
@@ -38,6 +43,7 @@
         {
             "id": "t6",
             "titulo": "Conferir rótulos dos formulários",
+            "descricao": "Revisar se todos os controles possuem rótulos claros e corretamente associados.",
             "status": "em-revisao",
             "prioridade": "media",
             "prazo": "2026-09-08"
@@ -45,6 +51,7 @@
         {
             "id": "t7",
             "titulo": "Criar o repositório da disciplina",
+            "descricao": "Preparar o repositório utilizado para armazenar e acompanhar as entregas.",
             "status": "concluida",
             "prioridade": "alta",
             "prazo": "2026-08-11"
@@ -52,6 +59,7 @@
         {
             "id": "t8",
             "titulo": "Organizar requisitos da primeira entrega",
+            "descricao": "Reunir e organizar os requisitos necessários para concluir a primeira etapa.",
             "status": "concluida",
             "prioridade": "baixa",
             "prazo": "2026-08-11"

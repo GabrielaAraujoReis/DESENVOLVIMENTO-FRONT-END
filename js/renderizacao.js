@@ -37,6 +37,10 @@ function criarCartao(tarefa) {
 
     cabecalho.append(titulo, prioridade);
 
+    const descricao = document.createElement("p");
+    descricao.className = "task-description";
+    descricao.textContent = tarefa.descricao;
+
     const prazo = document.createElement("p");
     prazo.className = "deadline";
 
@@ -58,7 +62,12 @@ function criarCartao(tarefa) {
 
     botao.append(textoBotao);
 
-    cartao.append(cabecalho, prazo, botao);
+    cartao.append(
+        cabecalho,
+        descricao,
+        prazo,
+        botao
+    );
 
     item.append(cartao);
 
