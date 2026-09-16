@@ -206,41 +206,52 @@ button:hover {
 
 .status-percent {
     flex: 0 0 auto;
-    font-size: 0.9rem;
+    padding: 0.18rem 0.55rem;
+    border-radius: 999px;
+    background: #f4ede2;
+    border: 0.08rem solid var(--color-border);
+    font-size: 0.82rem;
     font-weight: 800;
 }
 
 .status-progressbar {
+    position: relative;
     width: 100%;
-    height: 0.75rem;
+    height: 0.8rem;
     margin-bottom: var(--space-medium);
     overflow: hidden;
-    border: 0.1rem solid #9f927f;
+    border: none;
+    border-radius: 999px;
     background: #ddd4c5;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
 }
 
 .status-progressbar-fill {
     height: 100%;
+    border-radius: inherit;
+    box-shadow:
+        inset 0 -1px 1px rgba(0, 0, 0, 0.12),
+        0 0 0.3rem rgba(0, 0, 0, 0.08);
 }
 
 .status-todo .status-progressbar-fill {
     width: 0%;
-    background: var(--status-todo);
+    background: linear-gradient(90deg, #cf6759, var(--status-todo));
 }
 
 .status-progress .status-progressbar-fill {
     width: 40%;
-    background: var(--status-progress);
+    background: linear-gradient(90deg, #d79c2f, var(--status-progress));
 }
 
 .status-review .status-progressbar-fill {
     width: 75%;
-    background: var(--status-review);
+    background: linear-gradient(90deg, #8575db, var(--status-review));
 }
 
 .status-done .status-progressbar-fill {
     width: 100%;
-    background: var(--status-done);
+    background: linear-gradient(90deg, #5b9b70, var(--status-done));
 }
 
 .task-list {
@@ -307,27 +318,35 @@ button:hover {
 
 .priority {
     flex: 0 0 auto;
-    display: inline-block;
-    min-height: 1.5rem;
-    padding: 0.2rem 0.5rem;
-    border-radius: 0.25rem;
-    font-size: 0.75rem;
-    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    min-height: 1.6rem;
+    padding: 0.25rem 0.55rem;
+    border: 0.1rem solid transparent;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    box-shadow: 0 1px 2px rgba(47, 42, 36, 0.08);
 }
 
 .priority-high {
-    background: var(--priority-high-bg);
-    color: var(--priority-high-text);
+    background: #f3c9c0;
+    border-color: #d78676;
+    color: #6f2115;
 }
 
 .priority-medium {
-    background: var(--priority-medium-bg);
-    color: var(--priority-medium-text);
+    background: #f2dda2;
+    border-color: #cba94e;
+    color: #594000;
 }
 
 .priority-low {
-    background: var(--priority-low-bg);
-    color: var(--priority-low-text);
+    background: #cee2d3;
+    border-color: #7eae8c;
+    color: #21482e;
 }
 
 .deadline {
