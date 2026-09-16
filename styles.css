@@ -347,4 +347,23 @@ body > footer p {
     .form-actions button {
         width: auto;
     }
+
+    .task-card {
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    
+    .task-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+    }
+
+    .task-card button {
+        transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+    
+    .task-card button:hover {
+        transform: scale(1.03);
+        opacity: 0.9;
+    }
+    
 }
