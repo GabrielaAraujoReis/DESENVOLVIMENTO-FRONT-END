@@ -151,7 +151,10 @@ button:hover {
 
 .task-board {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(min(100%, 18rem), 1fr)
+    );
     gap: var(--space-medium);
 }
 
@@ -256,6 +259,15 @@ button:hover {
     border-radius: var(--radius);
     background: #fffdf8;
     box-shadow: 0.18rem 0.18rem 0 #9b8d7c;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.task-card:hover {
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 0.5rem 1rem rgba(47, 42, 36, 0.18);
 }
 
 .task-card-header {
@@ -313,11 +325,22 @@ button:hover {
     border-top: 0.1rem dashed var(--color-border);
 }
 
+.task-card button {
+    transition:
+        transform 0.2s ease,
+        opacity 0.2s ease;
+}
+
+.task-card button:hover {
+    transform: scale(1.03);
+    opacity: 0.9;
+}
+
 body > footer p {
     margin-bottom: 0;
 }
 
-/* Em 48rem os três filtros já cabem lado a lado sem apertar o conteúdo. */
+/* Em 48rem os quatro controles já cabem lado a lado. */
 @media (min-width: 48rem) {
     main {
         padding: var(--space-large);
@@ -325,7 +348,7 @@ body > footer p {
 
     .filters-grid {
         display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-columns: repeat(4, minmax(0, 1fr));
         align-items: end;
         gap: var(--space-medium);
     }
@@ -347,23 +370,4 @@ body > footer p {
     .form-actions button {
         width: auto;
     }
-
-    .task-card {
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    
-    .task-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
-    }
-
-    .task-card button {
-        transition: transform 0.2s ease, opacity 0.2s ease;
-    }
-    
-    .task-card button:hover {
-        transform: scale(1.03);
-        opacity: 0.9;
-    }
-    
 }
