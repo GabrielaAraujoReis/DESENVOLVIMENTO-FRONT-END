@@ -22,143 +22,455 @@
 
     <header class="site-header">
 
-        <div class="header-top">
+    <!-- ==================================================
+         CENÁRIO CLARO
+    =================================================== -->
+    <div class="header-scene day-scene" aria-hidden="true">
 
-            <div class="header-title-board">
-                <h1>
-                    Quadro de Tarefas Acadêmicas
-                </h1>
-            </div>
+        <svg
+            viewBox="0 0 1440 230"
+            preserveAspectRatio="none"
+        >
+
+            <!-- CÉU -->
+            <rect
+                width="1440"
+                height="230"
+                class="day-sky"
+            ></rect>
 
 
-            <button
-                type="button"
-                class="theme-button"
-                data-alternar-tema
-                aria-label="Ativar modo escuro"
-                aria-pressed="false"
-                title="Ativar modo escuro"
+            <!-- SOL -->
+            <circle
+                cx="380"
+                cy="67"
+                r="34"
+                class="day-sun-glow"
+            ></circle>
+
+            <circle
+                cx="380"
+                cy="67"
+                r="27"
+                class="day-sun"
+            ></circle>
+
+
+            <!-- NUVEM ESQUERDA -->
+            <g class="day-cloud">
+                <ellipse cx="125" cy="56" rx="44" ry="15"></ellipse>
+                <circle cx="105" cy="50" r="18"></circle>
+                <circle cx="135" cy="41" r="25"></circle>
+                <circle cx="164" cy="51" r="17"></circle>
+            </g>
+
+
+            <!-- NUVEM CENTRAL -->
+            <g class="day-cloud cloud-small">
+                <ellipse cx="495" cy="72" rx="35" ry="11"></ellipse>
+                <circle cx="480" cy="67" r="14"></circle>
+                <circle cx="502" cy="60" r="19"></circle>
+                <circle cx="522" cy="69" r="12"></circle>
+            </g>
+
+
+            <!-- NUVEM DIREITA -->
+            <g class="day-cloud">
+                <ellipse cx="1095" cy="60" rx="58" ry="17"></ellipse>
+                <circle cx="1067" cy="53" r="21"></circle>
+                <circle cx="1100" cy="42" r="29"></circle>
+                <circle cx="1135" cy="54" r="20"></circle>
+            </g>
+
+
+            <!-- PÁSSAROS -->
+            <g
+                class="birds"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
             >
+                <path d="M245 72 Q252 66 259 72"></path>
+                <path d="M259 72 Q266 66 273 72"></path>
 
-                <!-- SOL -->
-                <svg
-                    class="theme-icon sun-icon"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                >
-
-                    <circle
-                        cx="12"
-                        cy="12"
-                        r="4"
-                        fill="currentColor"
-                    ></circle>
-
-                    <g
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                    >
-                        <line x1="12" y1="2" x2="12" y2="5"></line>
-                        <line x1="12" y1="19" x2="12" y2="22"></line>
-
-                        <line x1="2" y1="12" x2="5" y2="12"></line>
-                        <line x1="19" y1="12" x2="22" y2="12"></line>
-
-                        <line x1="4.9" y1="4.9" x2="7" y2="7"></line>
-                        <line x1="17" y1="17" x2="19.1" y2="19.1"></line>
-
-                        <line x1="17" y1="7" x2="19.1" y2="4.9"></line>
-                        <line x1="4.9" y1="19.1" x2="7" y2="17"></line>
-                    </g>
-
-                </svg>
+                <path d="M280 58 Q287 52 294 58"></path>
+                <path d="M294 58 Q301 52 308 58"></path>
+            </g>
 
 
-                <!-- LUA -->
-                <svg
-                    class="theme-icon moon-icon"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                >
+            <!-- MORROS DE FUNDO -->
+            <path
+                class="hill-back"
+                d="
+                    M0 155
+                    C120 110 220 125 330 153
+                    C450 183 535 112 670 143
+                    C800 173 900 118 1015 145
+                    C1135 174 1270 110 1440 143
+                    L1440 230
+                    L0 230
+                    Z
+                "
+            ></path>
 
-                    <path
-                        d="
-                            M18.5 15.5
-                            A8 8 0 0 1 8.5 5
-                            A7.5 7.5 0 1 0 18.5 15.5Z
-                        "
-                        fill="currentColor"
-                    ></path>
 
-                </svg>
+            <!-- MORROS DA FRENTE -->
+            <path
+                class="hill-front"
+                d="
+                    M0 175
+                    C120 145 235 190 360 164
+                    C500 136 595 196 745 166
+                    C890 137 1015 194 1150 161
+                    C1265 135 1360 160 1440 169
+                    L1440 230
+                    L0 230
+                    Z
+                "
+            ></path>
 
-            </button>
+
+            <!-- VEGETAÇÃO ESQUERDA -->
+            <g class="field-plant left-plant">
+
+                <path
+                    d="M32 208 C37 176 42 150 58 125"
+                ></path>
+
+                <path
+                    d="M42 170
+                       C15 167 13 145 17 136
+                       C35 138 45 150 42 170Z"
+                ></path>
+
+                <path
+                    d="M50 151
+                       C73 143 79 125 77 115
+                       C60 118 49 131 50 151Z"
+                ></path>
+
+                <path
+                    d="M57 132
+                       C37 125 36 108 39 99
+                       C52 102 59 113 57 132Z"
+                ></path>
+
+            </g>
+
+
+            <!-- VEGETAÇÃO DIREITA -->
+            <g class="field-plant right-plant">
+
+                <path
+                    d="M1385 210 C1382 175 1377 148 1362 120"
+                ></path>
+
+                <path
+                    d="M1374 168
+                       C1401 165 1405 143 1400 134
+                       C1383 138 1372 150 1374 168Z"
+                ></path>
+
+                <path
+                    d="M1367 149
+                       C1344 141 1337 123 1340 113
+                       C1357 117 1368 130 1367 149Z"
+                ></path>
+
+                <path
+                    d="M1361 130
+                       C1380 121 1381 105 1378 96
+                       C1365 100 1358 112 1361 130Z"
+                ></path>
+
+            </g>
+
+
+            <!-- CERCA -->
+            <g class="field-fence">
+
+                <rect x="92" y="167" width="9" height="43" rx="2"></rect>
+                <rect x="212" y="165" width="9" height="45" rx="2"></rect>
+
+                <rect
+                    x="95"
+                    y="177"
+                    width="120"
+                    height="7"
+                    rx="3"
+                    transform="rotate(1 95 177)"
+                ></rect>
+
+                <rect
+                    x="95"
+                    y="195"
+                    width="120"
+                    height="7"
+                    rx="3"
+                    transform="rotate(-1 95 195)"
+                ></rect>
+
+            </g>
+
+        </svg>
+
+    </div>
+
+
+    <!-- ==================================================
+         CENÁRIO ESCURO
+    =================================================== -->
+    <div class="header-scene night-scene" aria-hidden="true">
+
+        <svg
+            viewBox="0 0 1440 230"
+            preserveAspectRatio="none"
+        >
+
+            <!-- CÉU -->
+            <rect
+                width="1440"
+                height="230"
+                class="night-sky"
+            ></rect>
+
+
+            <!-- ESTRELAS -->
+            <g class="stars">
+
+                <circle cx="80" cy="26" r="1.7"></circle>
+                <circle cx="205" cy="49" r="1.3"></circle>
+                <circle cx="325" cy="21" r="1.6"></circle>
+                <circle cx="515" cy="42" r="1.4"></circle>
+                <circle cx="585" cy="18" r="1.3"></circle>
+                <circle cx="750" cy="33" r="1.7"></circle>
+                <circle cx="910" cy="19" r="1.5"></circle>
+                <circle cx="1015" cy="49" r="1.2"></circle>
+                <circle cx="1148" cy="22" r="1.6"></circle>
+                <circle cx="1270" cy="47" r="1.4"></circle>
+                <circle cx="1370" cy="24" r="1.5"></circle>
+
+            </g>
+
+
+            <!-- LUA -->
+            <circle
+                cx="382"
+                cy="62"
+                r="29"
+                class="moon-glow"
+            ></circle>
+
+            <circle
+                cx="382"
+                cy="62"
+                r="24"
+                class="moon"
+            ></circle>
+
+            <circle
+                cx="373"
+                cy="54"
+                r="6"
+                class="moon-crater"
+            ></circle>
+
+            <circle
+                cx="390"
+                cy="70"
+                r="5"
+                class="moon-crater"
+            ></circle>
+
+            <circle
+                cx="396"
+                cy="52"
+                r="3"
+                class="moon-crater"
+            ></circle>
+
+
+            <!-- NUVENS -->
+            <g class="night-cloud">
+                <ellipse cx="120" cy="62" rx="54" ry="14"></ellipse>
+                <circle cx="96" cy="57" r="18"></circle>
+                <circle cx="128" cy="48" r="25"></circle>
+                <circle cx="160" cy="58" r="17"></circle>
+            </g>
+
+
+            <g class="night-cloud">
+                <ellipse cx="1080" cy="67" rx="62" ry="15"></ellipse>
+                <circle cx="1052" cy="61" r="19"></circle>
+                <circle cx="1085" cy="49" r="28"></circle>
+                <circle cx="1120" cy="61" r="18"></circle>
+            </g>
+
+
+            <!-- MORROS ESCUROS -->
+            <path
+                class="night-hill-back"
+                d="
+                    M0 155
+                    C120 110 220 125 330 153
+                    C450 183 535 112 670 143
+                    C800 173 900 118 1015 145
+                    C1135 174 1270 110 1440 143
+                    L1440 230
+                    L0 230
+                    Z
+                "
+            ></path>
+
+
+            <path
+                class="night-hill-front"
+                d="
+                    M0 175
+                    C120 145 235 190 360 164
+                    C500 136 595 196 745 166
+                    C890 137 1015 194 1150 161
+                    C1265 135 1360 160 1440 169
+                    L1440 230
+                    L0 230
+                    Z
+                "
+            ></path>
+
+
+            <!-- PLANTAS -->
+            <g class="night-plant">
+
+                <path
+                    d="M30 208 C35 174 40 145 58 118"
+                ></path>
+
+                <path
+                    d="M43 166
+                       C16 164 14 142 18 133
+                       C36 136 45 148 43 166Z"
+                ></path>
+
+                <path
+                    d="M51 146
+                       C73 138 80 121 77 111
+                       C61 114 50 127 51 146Z"
+                ></path>
+
+            </g>
+
+
+            <g class="night-plant night-plant-right">
+
+                <path
+                    d="M1392 208 C1387 174 1381 145 1363 118"
+                ></path>
+
+                <path
+                    d="M1379 166
+                       C1406 164 1408 142 1404 133
+                       C1386 136 1377 148 1379 166Z"
+                ></path>
+
+                <path
+                    d="M1371 146
+                       C1349 138 1342 121 1345 111
+                       C1361 114 1372 127 1371 146Z"
+                ></path>
+
+            </g>
+
+        </svg>
+
+    </div>
+
+
+    <!-- ==================================================
+         PLACA
+    =================================================== -->
+    <div class="header-top">
+
+        <div class="header-title-board">
+
+            <h1>
+                Quadro de Tarefas Acadêmicas
+            </h1>
 
         </div>
 
 
-        <!-- ONDA VERDE CLARA -->
-        <div
-            class="header-wave header-wave-back"
-            aria-hidden="true"
+        <!-- BOTÃO DO TEMA -->
+        <button
+            type="button"
+            class="theme-button"
+            data-alternar-tema
+            aria-label="Ativar modo escuro"
+            aria-pressed="false"
+            title="Ativar modo escuro"
         >
 
+            <!-- SOL -->
             <svg
-                viewBox="0 0 1440 120"
-                preserveAspectRatio="none"
+                class="theme-icon sun-icon"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+            >
+
+                <circle
+                    cx="12"
+                    cy="12"
+                    r="4"
+                    fill="currentColor"
+                ></circle>
+
+                <g
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                >
+
+                    <line x1="12" y1="2" x2="12" y2="5"></line>
+                    <line x1="12" y1="19" x2="12" y2="22"></line>
+
+                    <line x1="2" y1="12" x2="5" y2="12"></line>
+                    <line x1="19" y1="12" x2="22" y2="12"></line>
+
+                    <line x1="4.9" y1="4.9" x2="7" y2="7"></line>
+                    <line x1="17" y1="17" x2="19.1" y2="19.1"></line>
+
+                    <line x1="17" y1="7" x2="19.1" y2="4.9"></line>
+                    <line x1="4.9" y1="19.1" x2="7" y2="17"></line>
+
+                </g>
+
+            </svg>
+
+
+            <!-- LUA -->
+            <svg
+                class="theme-icon moon-icon"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
             >
 
                 <path
                     d="
-                        M0,52
-                        C100,15 200,15 300,52
-                        C400,90 500,90 600,52
-                        C700,15 800,15 900,52
-                        C1000,90 1100,90 1200,52
-                        C1300,15 1380,25 1440,48
-                        L1440,120
-                        L0,120
-                        Z
+                        M18.5 15.5
+                        A8 8 0 0 1 8.5 5
+                        A7.5 7.5 0 1 0 18.5 15.5Z
                     "
+                    fill="currentColor"
                 ></path>
 
             </svg>
 
-        </div>
+        </button>
 
+    </div>
 
-        <!-- ONDA VERDE PRINCIPAL -->
-        <div
-            class="header-wave header-wave-front"
-            aria-hidden="true"
-        >
-
-            <svg
-                viewBox="0 0 1440 120"
-                preserveAspectRatio="none"
-            >
-
-                <path
-                    d="
-                        M0,68
-                        C100,100 200,100 300,68
-                        C400,35 500,35 600,68
-                        C700,100 800,100 900,68
-                        C1000,35 1100,35 1200,68
-                        C1300,100 1380,75 1440,65
-                        L1440,120
-                        L0,120
-                        Z
-                    "
-                ></path>
-
-            </svg>
-
-        </div>
-
-    </header>
+</header>
 
 
     <!-- ==================================================
