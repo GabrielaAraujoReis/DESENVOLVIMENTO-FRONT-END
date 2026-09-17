@@ -16,16 +16,23 @@ const estado = {
 };
 
 
-function selecionarTarefas(estado) {
+let ultimoElementoFocado = null;
+
+
+/* ======================================================
+   SELEÇÃO DAS TAREFAS
+====================================================== */
+
+function selecionarTarefas(estadoAtual) {
 
     const termo =
-        estado.busca
+        estadoAtual.busca
             .trim()
             .toLowerCase();
 
 
     const tarefasFiltradas =
-        estado.tarefas
+        estadoAtual.tarefas
 
             .filter((tarefa) =>
                 tarefa.titulo
@@ -34,13 +41,13 @@ function selecionarTarefas(estado) {
             )
 
             .filter((tarefa) =>
-                estado.status === "todos" ||
-                tarefa.status === estado.status
+                estadoAtual.status === "todos" ||
+                tarefa.status === estadoAtual.status
             )
 
             .filter((tarefa) =>
-                estado.prioridade === "todas" ||
-                tarefa.prioridade === estado.prioridade
+                estadoAtual.prioridade === "todas" ||
+                tarefa.prioridade === estadoAtual.prioridade
             );
 
 
@@ -48,7 +55,7 @@ function selecionarTarefas(estado) {
         .sort((a, b) => {
 
             if (
-                estado.ordenacao ===
+                estadoAtual.ordenacao ===
                 "prazo-desc"
             ) {
 
@@ -57,6 +64,7 @@ function selecionarTarefas(estado) {
                 );
             }
 
+
             return a.prazo.localeCompare(
                 b.prazo
             );
@@ -64,7 +72,11 @@ function selecionarTarefas(estado) {
 }
 
 
-function renderizarTema(estado) {
+/* ======================================================
+   TEMA
+====================================================== */
+
+function renderizarTema(estadoAtual) {
 
     const pagina =
         document.documentElement;
@@ -77,7 +89,7 @@ function renderizarTema(estado) {
 
 
     pagina.dataset.theme =
-        estado.tema;
+        estadoAtual.tema;
 
 
     if (!botaoTema) {
@@ -86,7 +98,7 @@ function renderizarTema(estado) {
 
 
     const escuro =
-        estado.tema === "escuro";
+        estadoAtual.tema === "escuro";
 
 
     botaoTema.setAttribute(
@@ -110,7 +122,11 @@ function renderizarTema(estado) {
 }
 
 
-function renderizarPainelFiltros(estado) {
+/* ======================================================
+   FILTROS
+====================================================== */
+
+function renderizarPainelFiltros(estadoAtual) {
 
     const conteudo =
         document.querySelector(
@@ -130,21 +146,655 @@ function renderizarPainelFiltros(estado) {
 
 
     conteudo.hidden =
-        !estado.filtrosAbertos;
+        !estadoAtual.filtrosAbertos;
 
 
     botao.setAttribute(
         "aria-expanded",
-        String(estado.filtrosAbertos)
+        String(
+            estadoAtual.filtrosAbertos
+        )
     );
 
 
     botao.title =
-        estado.filtrosAbertos
+        estadoAtual.filtrosAbertos
             ? "Recolher busca e filtros"
             : "Abrir busca e filtros";
 }
 
+
+/* ======================================================
+   MODAL
+====================================================== */
+
+function abrirModal(
+    titulo,
+    conteudo,
+    tipo = ""
+) {
+
+    const modal =
+        document.querySelector(
+            "[data-modal]"
+        );
+
+
+    const elementoTitulo =
+        document.querySelector(
+            "[data-modal-titulo]"
+        );
+
+
+    const corpo =
+        document.querySelector(
+            "[data-modal-corpo]"
+        );
+
+
+    if (
+        !modal ||
+        !elementoTitulo ||
+        !corpo
+    ) {
+        return;
+    }
+
+
+    ultimoElementoFocado =
+        document.activeElement;
+
+
+    elementoTitulo.textContent =
+        titulo;
+
+
+    corpo.replaceChildren(
+        conteudo
+    );
+
+
+    modal.dataset.modalTipo =
+        tipo;
+
+
+    modal.hidden =
+        false;
+
+
+    document.body.classList.add(
+        "modal-open"
+    );
+
+
+    const botaoFechar =
+        modal.querySelector(
+            ".modal-close"
+        );
+
+
+    if (botaoFechar) {
+        botaoFechar.focus();
+    }
+}
+
+
+function fecharModal() {
+
+    const modal =
+        document.querySelector(
+            "[data-modal]"
+        );
+
+
+    const corpo =
+        document.querySelector(
+            "[data-modal-corpo]"
+        );
+
+
+    if (!modal) {
+        return;
+    }
+
+
+    modal.hidden =
+        true;
+
+
+    modal.dataset.modalTipo =
+        "";
+
+
+    document.body.classList.remove(
+        "modal-open"
+    );
+
+
+    if (corpo) {
+        corpo.replaceChildren();
+    }
+
+
+    if (
+        ultimoElementoFocado instanceof HTMLElement
+    ) {
+
+        ultimoElementoFocado.focus();
+    }
+
+
+    ultimoElementoFocado =
+        null;
+}
+
+
+function instalarEventosDoModal() {
+
+    const modal =
+        document.querySelector(
+            "[data-modal]"
+        );
+
+
+    if (!modal) {
+        return;
+    }
+
+
+    modal.addEventListener(
+        "click",
+        (evento) => {
+
+            if (
+                !(evento.target instanceof Element)
+            ) {
+                return;
+            }
+
+
+            const fechar =
+                evento.target.closest(
+                    "[data-fechar-modal]"
+                );
+
+
+            if (!fechar) {
+                return;
+            }
+
+
+            fecharModal();
+        }
+    );
+
+
+    document.addEventListener(
+        "keydown",
+        (evento) => {
+
+            if (
+                evento.key === "Escape" &&
+                !modal.hidden
+            ) {
+
+                fecharModal();
+            }
+        }
+    );
+}
+
+
+/* ======================================================
+   FASES DA PLANTA
+====================================================== */
+
+function criarFasesDaPlanta() {
+
+    const container =
+        document.createElement("div");
+
+
+    container.className =
+        "plant-stages";
+
+
+    container.innerHTML = `
+
+        <article class="plant-stage">
+
+            <div class="plant-stage-drawing">
+
+                <svg
+                    viewBox="0 0 64 64"
+                    aria-hidden="true"
+                >
+
+                    <ellipse
+                        cx="32"
+                        cy="43"
+                        rx="9"
+                        ry="5"
+                        class="plant-seed"
+                    ></ellipse>
+
+                </svg>
+
+            </div>
+
+
+            <div class="plant-stage-info">
+
+                <strong>
+                    0% – 24%
+                </strong>
+
+                <span>
+                    Semente
+                </span>
+
+            </div>
+
+        </article>
+
+
+        <article class="plant-stage">
+
+            <div class="plant-stage-drawing">
+
+                <svg
+                    viewBox="0 0 64 64"
+                    aria-hidden="true"
+                >
+
+                    <path
+                        d="M23 47 H41 L38 56 H26 Z"
+                        class="stage-pot"
+                    ></path>
+
+                    <path
+                        d="M32 47 V30"
+                        class="stage-stem"
+                    ></path>
+
+                    <path
+                        d="
+                            M32 38
+                            C23 38 21 31 22 27
+                            C28 28 32 31 32 38Z
+                        "
+                        class="stage-leaf"
+                    ></path>
+
+                </svg>
+
+            </div>
+
+
+            <div class="plant-stage-info">
+
+                <strong>
+                    25% – 49%
+                </strong>
+
+                <span>
+                    Broto
+                </span>
+
+            </div>
+
+        </article>
+
+
+        <article class="plant-stage">
+
+            <div class="plant-stage-drawing">
+
+                <svg
+                    viewBox="0 0 64 64"
+                    aria-hidden="true"
+                >
+
+                    <path
+                        d="M23 47 H41 L38 56 H26 Z"
+                        class="stage-pot"
+                    ></path>
+
+                    <path
+                        d="M32 47 V24"
+                        class="stage-stem"
+                    ></path>
+
+                    <path
+                        d="
+                            M32 39
+                            C22 39 20 31 21 27
+                            C28 28 32 32 32 39Z
+                        "
+                        class="stage-leaf"
+                    ></path>
+
+                    <path
+                        d="
+                            M32 32
+                            C42 32 44 25 43 21
+                            C36 22 32 25 32 32Z
+                        "
+                        class="stage-leaf"
+                    ></path>
+
+                </svg>
+
+            </div>
+
+
+            <div class="plant-stage-info">
+
+                <strong>
+                    50% – 74%
+                </strong>
+
+                <span>
+                    Muda
+                </span>
+
+            </div>
+
+        </article>
+
+
+        <article class="plant-stage">
+
+            <div class="plant-stage-drawing">
+
+                <svg
+                    viewBox="0 0 64 64"
+                    aria-hidden="true"
+                >
+
+                    <path
+                        d="M23 47 H41 L38 56 H26 Z"
+                        class="stage-pot"
+                    ></path>
+
+                    <path
+                        d="M32 47 V18"
+                        class="stage-stem"
+                    ></path>
+
+                    <path
+                        d="
+                            M32 40
+                            C21 40 19 31 20 27
+                            C28 28 32 32 32 40Z
+                        "
+                        class="stage-leaf"
+                    ></path>
+
+                    <path
+                        d="
+                            M32 32
+                            C43 32 45 24 44 20
+                            C36 21 32 24 32 32Z
+                        "
+                        class="stage-leaf"
+                    ></path>
+
+                    <path
+                        d="
+                            M32 25
+                            C24 24 23 17 24 14
+                            C29 15 32 18 32 25Z
+                        "
+                        class="stage-leaf"
+                    ></path>
+
+                </svg>
+
+            </div>
+
+
+            <div class="plant-stage-info">
+
+                <strong>
+                    75% – 99%
+                </strong>
+
+                <span>
+                    Crescendo
+                </span>
+
+            </div>
+
+        </article>
+
+
+        <article class="plant-stage">
+
+            <div class="plant-stage-drawing">
+
+                <svg
+                    viewBox="0 0 64 64"
+                    aria-hidden="true"
+                >
+
+                    <path
+                        d="M23 47 H41 L38 56 H26 Z"
+                        class="stage-pot"
+                    ></path>
+
+                    <path
+                        d="M32 47 V17"
+                        class="stage-stem"
+                    ></path>
+
+                    <path
+                        d="
+                            M32 40
+                            C20 40 18 31 19 26
+                            C28 27 32 31 32 40Z
+                        "
+                        class="stage-leaf"
+                    ></path>
+
+                    <path
+                        d="
+                            M32 33
+                            C44 33 46 24 45 19
+                            C36 20 32 24 32 33Z
+                        "
+                        class="stage-leaf"
+                    ></path>
+
+                    <path
+                        d="
+                            M32 26
+                            C23 25 22 17 23 13
+                            C29 14 32 18 32 26Z
+                        "
+                        class="stage-leaf"
+                    ></path>
+
+                    <path
+                        d="
+                            M32 21
+                            C40 20 42 13 41 10
+                            C35 10 32 14 32 21Z
+                        "
+                        class="stage-leaf"
+                    ></path>
+
+                </svg>
+
+            </div>
+
+
+            <div class="plant-stage-info">
+
+                <strong>
+                    100%
+                </strong>
+
+                <span>
+                    Planta completa
+                </span>
+
+            </div>
+
+        </article>
+    `;
+
+
+    return container;
+}
+
+
+function abrirFasesDaPlanta() {
+
+    abrirModal(
+        "Fases da planta",
+        criarFasesDaPlanta(),
+        "planta"
+    );
+}
+
+
+/* ======================================================
+   DETALHES DA TAREFA
+====================================================== */
+
+function formatarStatus(status) {
+
+    if (status === "a-fazer") {
+        return "A fazer";
+    }
+
+
+    if (status === "em-andamento") {
+        return "Em andamento";
+    }
+
+
+    if (status === "em-revisao") {
+        return "Em revisão";
+    }
+
+
+    return "Concluída";
+}
+
+
+function formatarPrioridade(prioridade) {
+
+    if (prioridade === "alta") {
+        return "Alta";
+    }
+
+
+    if (prioridade === "media") {
+        return "Média";
+    }
+
+
+    return "Baixa";
+}
+
+
+function abrirDetalhesTarefa(tarefa) {
+
+    const detalhes =
+        document.createElement("div");
+
+
+    detalhes.className =
+        "task-modal-details";
+
+
+    const descricao =
+        document.createElement("p");
+
+
+    descricao.className =
+        "task-modal-description";
+
+
+    descricao.textContent =
+        tarefa.descricao;
+
+
+    const lista =
+        document.createElement("dl");
+
+
+    lista.className =
+        "task-modal-list";
+
+
+    const dados = [
+        [
+            "Status",
+            formatarStatus(
+                tarefa.status
+            )
+        ],
+        [
+            "Prioridade",
+            formatarPrioridade(
+                tarefa.prioridade
+            )
+        ],
+        [
+            "Prazo",
+            tarefa.prazo
+        ]
+    ];
+
+
+    for (
+        const [rotulo, valor]
+        of dados
+    ) {
+
+        const termo =
+            document.createElement("dt");
+
+
+        termo.textContent =
+            rotulo;
+
+
+        const descricaoDado =
+            document.createElement("dd");
+
+
+        descricaoDado.textContent =
+            valor;
+
+
+        lista.append(
+            termo,
+            descricaoDado
+        );
+    }
+
+
+    detalhes.append(
+        descricao,
+        lista
+    );
+
+
+    abrirModal(
+        tarefa.titulo,
+        detalhes,
+        "tarefa"
+    );
+}
+
+
+/* ======================================================
+   PRAZOS DA SEMANA
+====================================================== */
 
 function calcularPrazosDaSemana(tarefas) {
 
@@ -223,6 +873,10 @@ function calcularPrazosDaSemana(tarefas) {
 }
 
 
+/* ======================================================
+   PLANTA
+====================================================== */
+
 function renderizarPlanta(percentual) {
 
     const caule =
@@ -257,20 +911,24 @@ function renderizarPlanta(percentual) {
                 );
 
 
-            let limite = 100;
+            let limite =
+                100;
 
 
             if (numero === 1) {
                 limite = 25;
             }
 
+
             if (numero === 2) {
                 limite = 50;
             }
 
+
             if (numero === 3) {
                 limite = 75;
             }
+
 
             if (numero === 4) {
                 limite = 100;
@@ -286,14 +944,18 @@ function renderizarPlanta(percentual) {
 }
 
 
-function renderizarResumo(estado) {
+/* ======================================================
+   RESUMO
+====================================================== */
+
+function renderizarResumo(estadoAtual) {
 
     const total =
-        estado.tarefas.length;
+        estadoAtual.tarefas.length;
 
 
     const concluidas =
-        estado.tarefas.filter(
+        estadoAtual.tarefas.filter(
             (tarefa) =>
                 tarefa.status ===
                 "concluida"
@@ -314,7 +976,7 @@ function renderizarResumo(estado) {
 
     const prazosSemana =
         calcularPrazosDaSemana(
-            estado.tarefas
+            estadoAtual.tarefas
         );
 
 
@@ -409,14 +1071,26 @@ function renderizarResumo(estado) {
 }
 
 
-function renderizarAplicacao(estado) {
+/* ======================================================
+   RENDERIZAÇÃO GERAL
+====================================================== */
 
-    renderizarTema(estado);
-    renderizarPainelFiltros(estado);
+function renderizarAplicacao(
+    estadoAtual
+) {
+
+    renderizarTema(
+        estadoAtual
+    );
+
+
+    renderizarPainelFiltros(
+        estadoAtual
+    );
 
 
     if (
-        estado.carregamento ===
+        estadoAtual.carregamento ===
         "carregando"
     ) {
 
@@ -429,24 +1103,26 @@ function renderizarAplicacao(estado) {
 
 
     if (
-        estado.carregamento ===
+        estadoAtual.carregamento ===
         "erro"
     ) {
 
         renderizarEstado(
             "erro",
-            estado.erro
+            estadoAtual.erro
         );
 
         return;
     }
 
 
-    renderizarResumo(estado);
+    renderizarResumo(
+        estadoAtual
+    );
 
 
     if (
-        estado.tarefas.length === 0
+        estadoAtual.tarefas.length === 0
     ) {
 
         renderizarEstado(
@@ -459,7 +1135,9 @@ function renderizarAplicacao(estado) {
 
 
     const tarefasVisiveis =
-        selecionarTarefas(estado);
+        selecionarTarefas(
+            estadoAtual
+        );
 
 
     if (
@@ -489,10 +1167,14 @@ function renderizarAplicacao(estado) {
     if (painelEstado) {
 
         painelEstado.textContent =
-            `${tarefasVisiveis.length} de ${estado.tarefas.length} tarefa(s).`;
+            `${tarefasVisiveis.length} de ${estadoAtual.tarefas.length} tarefa(s).`;
     }
 }
 
+
+/* ======================================================
+   INICIALIZAÇÃO
+====================================================== */
 
 async function iniciarAplicacao() {
 
@@ -544,11 +1226,21 @@ async function iniciarAplicacao() {
         );
 
 
+    const botaoFases =
+        document.querySelector(
+            "[data-abrir-fases]"
+        );
+
+
     if (!quadro) {
+
         throw new Error(
             "Quadro de tarefas não encontrado."
         );
     }
+
+
+    instalarEventosDoModal();
 
 
     if (botaoTema) {
@@ -585,6 +1277,15 @@ async function iniciarAplicacao() {
                     estado
                 );
             }
+        );
+    }
+
+
+    if (botaoFases) {
+
+        botaoFases.addEventListener(
+            "click",
+            abrirFasesDaPlanta
         );
     }
 
@@ -627,7 +1328,8 @@ async function iniciarAplicacao() {
 
         instalarEventosDoQuadro(
             quadro,
-            estado.tarefas
+            estado.tarefas,
+            abrirDetalhesTarefa
         );
 
 
@@ -718,10 +1420,20 @@ async function iniciarAplicacao() {
                 "reset",
                 () => {
 
-                    estado.busca = "";
-                    estado.status = "todos";
-                    estado.prioridade = "todas";
-                    estado.ordenacao = "prazo-asc";
+                    estado.busca =
+                        "";
+
+
+                    estado.status =
+                        "todos";
+
+
+                    estado.prioridade =
+                        "todas";
+
+
+                    estado.ordenacao =
+                        "prazo-asc";
 
 
                     setTimeout(

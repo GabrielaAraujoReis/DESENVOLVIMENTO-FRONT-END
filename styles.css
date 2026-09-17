@@ -1,3 +1,7 @@
+/* ======================================================
+   VARIÁVEIS
+====================================================== */
+
 :root {
     --color-background: #f3efe6;
     --color-surface: #fffaf0;
@@ -7,15 +11,22 @@
     --color-muted: #6b6258;
     --color-border: #c9bda9;
 
-    --color-header: #2f2a24;
-    --color-header-text: #fffaf0;
+    --color-header: #efe6d6;
+    --color-header-text: #2f2a24;
 
     --color-control: #fffdf8;
     --color-shadow: #9b8d7c;
 
     --progress-empty: #ddd4c5;
 
-    --wave-color: #d8c4a6;
+    --wave-light: #b8caa8;
+    --wave-dark: #829b74;
+
+    /*
+        PLAQUINHAS MAIS CLARAS NO MODO CLARO
+    */
+    --wood-plaque: #9a6b49;
+    --wood-plaque-dark: #70492f;
 
     --status-todo: #b84a3a;
     --status-progress: #b47d16;
@@ -33,6 +44,10 @@
 }
 
 
+/* ======================================================
+   MODO ESCURO
+====================================================== */
+
 html[data-theme="escuro"] {
     --color-background: #1d1b19;
     --color-surface: #292622;
@@ -42,7 +57,7 @@ html[data-theme="escuro"] {
     --color-muted: #c5b9a9;
     --color-border: #554d44;
 
-    --color-header: #151412;
+    --color-header: #1f211d;
     --color-header-text: #f8efe2;
 
     --color-control: #312d28;
@@ -50,7 +65,15 @@ html[data-theme="escuro"] {
 
     --progress-empty: #48423b;
 
-    --wave-color: #6b5747;
+    --wave-light: #465b45;
+    --wave-dark: #304231;
+
+    /*
+        NO MODO ESCURO VOLTA PARA
+        O MARROM ESCURO QUE VOCÊ GOSTOU.
+    */
+    --wood-plaque: #3b332b;
+    --wood-plaque-dark: #211d19;
 
     --status-todo: #db7567;
     --status-progress: #d9a13b;
@@ -63,6 +86,10 @@ html[data-theme="escuro"] {
     color-scheme: dark;
 }
 
+
+/* ======================================================
+   BASE
+====================================================== */
 
 *,
 *::before,
@@ -79,15 +106,19 @@ html {
 body {
     margin: 0;
 
-    color: var(--color-text);
-    background: var(--color-background);
+    color:
+        var(--color-text);
+
+    background:
+        var(--color-background);
 
     font-family:
         Arial,
         Helvetica,
         sans-serif;
 
-    line-height: 1.5;
+    line-height:
+        1.5;
 
     transition:
         background 0.25s ease,
@@ -95,7 +126,20 @@ body {
 }
 
 
+body.modal-open {
+    overflow: hidden;
+}
+
+
 h1,
+h2,
+h3,
+h4,
+p {
+    margin-top: 0;
+}
+
+
 h2,
 h3,
 h4,
@@ -109,31 +153,40 @@ button,
         Arial,
         sans-serif;
 
-    font-weight: 700;
+    font-weight:
+        700;
 }
 
 
-h1,
-h2,
-h3,
-h4,
-p {
-    margin-top: 0;
-}
-
+/* ======================================================
+   TÍTULO
+====================================================== */
 
 h1 {
-    margin-bottom: 0;
+    margin:
+        0;
+
+    font-family:
+        "Oswald",
+        "Arial Narrow",
+        Arial,
+        sans-serif;
 
     font-size:
         clamp(
-            1.8rem,
-            1.3rem + 3vw,
-            3.2rem
+            1.65rem,
+            1.35rem + 1.4vw,
+            2.35rem
         );
 
-    line-height: 1.05;
-    letter-spacing: -0.04em;
+    font-weight:
+        700;
+
+    line-height:
+        1.08;
+
+    letter-spacing:
+        -0.025em;
 }
 
 
@@ -144,7 +197,8 @@ h2 {
 
 
 h3 {
-    margin-bottom: 0;
+    margin-bottom:
+        0;
 
     font-size:
         1.05rem;
@@ -157,271 +211,363 @@ h3 {
 }
 
 
+/* ======================================================
+   MAIN
+====================================================== */
+
 main {
     padding:
         var(--space-medium);
 }
 
 
-/* CABEÇALHO */
+/* ======================================================
+   CABEÇALHO
+====================================================== */
 
 .site-header {
-    position: relative;
-    overflow: hidden;
+    position:
+        relative;
+
+    overflow:
+        hidden;
+
+    min-height:
+        11.5rem;
 
     padding:
-        1.4rem
+        1rem
         var(--space-large)
-        4rem;
+        5rem;
 
     background:
         var(--color-header);
 
     color:
         var(--color-header-text);
+
+    transition:
+        background 0.25s ease;
 }
 
 
-.header-content {
-    position: relative;
-    z-index: 2;
+.header-top {
+    position:
+        relative;
 
-    display: flex;
+    z-index:
+        3;
 
-    align-items: flex-start;
+    display:
+        flex;
+
+    min-height:
+        4.7rem;
+
+    align-items:
+        flex-start;
 
     justify-content:
-        space-between;
-
-    gap:
-        var(--space-medium);
+        center;
 }
 
 
-.header-subtitle {
-    margin-top: 0.5rem;
-    margin-bottom: 0;
+/* ======================================================
+   PLACA DO TOPO
+====================================================== */
+
+.header-title-board {
+    position:
+        relative;
+
+    width:
+        min(100%, 23rem);
+
+    padding:
+        0.75rem
+        1.25rem;
+
+    border:
+        0.12rem solid
+        var(--wood-plaque-dark);
+
+    border-radius:
+        0.65rem;
+
+    background:
+        var(--wood-plaque);
 
     color:
-        rgba(255, 250, 240, 0.82);
+        #fffaf0;
 
-    font-size:
-        0.98rem;
+    text-align:
+        center;
+
+    box-shadow:
+        0.2rem
+        0.22rem
+        0
+        var(--wood-plaque-dark);
+
+    transition:
+        background 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
 }
 
 
-.header-actions {
-    display: flex;
-    align-items: center;
-    gap: 0.7rem;
+.header-title-board h1 {
+    color:
+        #fffaf0;
 }
 
 
-/* ONDA */
+/* PARAFUSOS */
+
+.header-title-board::before,
+.header-title-board::after {
+    content:
+        "";
+
+    position:
+        absolute;
+
+    top:
+        50%;
+
+    width:
+        0.35rem;
+
+    height:
+        0.35rem;
+
+    border-radius:
+        50%;
+
+    background:
+        #d0a177;
+
+    transform:
+        translateY(-50%);
+}
+
+
+.header-title-board::before {
+    left:
+        0.6rem;
+}
+
+
+.header-title-board::after {
+    right:
+        0.6rem;
+}
+
+
+/* ======================================================
+   BOTÃO SOL / LUA
+====================================================== */
+
+.theme-button {
+    position:
+        absolute;
+
+    top:
+        0.3rem;
+
+    right:
+        0;
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    width:
+        2.8rem;
+
+    min-width:
+        2.8rem;
+
+    height:
+        2.8rem;
+
+    min-height:
+        2.8rem;
+
+    padding:
+        0;
+
+    border:
+        0.1rem solid
+        var(--color-border);
+
+    border-radius:
+        50%;
+
+    background:
+        var(--color-surface);
+
+    color:
+        #c99b26;
+
+    cursor:
+        pointer;
+
+    transition:
+        background 0.25s ease,
+        color 0.25s ease,
+        transform 0.2s ease;
+}
+
+
+.theme-button:hover {
+    filter:
+        none;
+
+    transform:
+        translateY(-1px);
+}
+
+
+.theme-icon {
+    width:
+        1.3rem;
+
+    height:
+        1.3rem;
+}
+
+
+.sun-icon {
+    display:
+        block;
+}
+
+
+.moon-icon {
+    display:
+        none;
+}
+
+
+html[data-theme="escuro"]
+.sun-icon {
+    display:
+        none;
+}
+
+
+html[data-theme="escuro"]
+.moon-icon {
+    display:
+        block;
+}
+
+
+html[data-theme="escuro"]
+.theme-button {
+    color:
+        #ddd7ca;
+}
+
+
+/* ======================================================
+   ONDAS
+====================================================== */
 
 .header-wave {
-    position: absolute;
+    position:
+        absolute;
 
-    left: 0;
-    right: 0;
-    bottom: -1px;
+    left:
+        0;
 
-    height: 3.2rem;
-    line-height: 0;
+    width:
+        100%;
+
+    line-height:
+        0;
 }
 
 
 .header-wave svg {
-    display: block;
-    width: 100%;
-    height: 100%;
+    display:
+        block;
+
+    width:
+        100%;
+
+    height:
+        100%;
 }
 
 
 .header-wave path {
-    fill:
-        var(--wave-color);
-
     transition:
         fill 0.25s ease;
 }
 
 
-/* PLANTA */
+.header-wave-back {
+    z-index:
+        1;
 
-.plant-wrapper {
-    display: inline-flex;
+    bottom:
+        0;
 
-    align-items: center;
-
-    justify-content: center;
-
-    width: 3rem;
-    height: 3rem;
-
-    border:
-        0.1rem solid
-        rgba(255, 255, 255, 0.25);
-
-    border-radius: 50%;
-
-    background:
-        rgba(255, 255, 255, 0.08);
+    height:
+        4.3rem;
 }
 
 
-.plant-svg {
-    width: 2.2rem;
-    height: 2.2rem;
-}
-
-
-.plant-pot {
+.header-wave-back path {
     fill:
-        var(--plant-pot);
+        var(--wave-light);
 }
 
 
-.plant-stem {
-    fill: none;
+.header-wave-front {
+    z-index:
+        2;
 
-    stroke:
-        var(--plant-green);
+    bottom:
+        -0.1rem;
 
-    stroke-width: 3;
-    stroke-linecap: round;
-
-    opacity: 0;
-
-    transform:
-        scaleY(0);
-
-    transform-origin:
-        center bottom;
-
-    transition:
-        opacity 0.3s ease,
-        transform 0.4s ease;
+    height:
+        3.3rem;
 }
 
 
-.plant-stem.visible {
-    opacity: 1;
-
-    transform:
-        scaleY(1);
-}
-
-
-.plant-leaf {
+.header-wave-front path {
     fill:
-        var(--plant-green);
-
-    opacity: 0;
-
-    transform:
-        scale(0);
-
-    transform-origin:
-        center;
-
-    transition:
-        opacity 0.35s ease,
-        transform 0.35s ease;
+        var(--wave-dark);
 }
 
 
-.plant-leaf.visible {
-    opacity: 1;
-
-    transform:
-        scale(1);
-}
-
-
-/* BOTÃO TEMA */
-
-.theme-button {
-    flex: 0 0 auto;
-
-    display: inline-flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    width: 3rem;
-    min-width: 3rem;
-
-    height: 3rem;
-    min-height: 3rem;
-
-    padding: 0;
-
-    border:
-        0.1rem solid
-        rgba(255, 255, 255, 0.25);
-
-    border-radius: 50%;
-
-    background:
-        rgba(255, 255, 255, 0.08);
-
-    color: #f2c85b;
-
-    cursor: pointer;
-}
-
-
-.theme-button:hover {
-    background:
-        rgba(255, 255, 255, 0.14);
-
-    filter: none;
-}
-
-
-.theme-icon {
-    width: 1.4rem;
-    height: 1.4rem;
-}
-
-
-.bulb-off {
-    display: none;
-}
-
-
-html[data-theme="escuro"]
-.bulb-on {
-    display: none;
-}
-
-
-html[data-theme="escuro"]
-.bulb-off {
-    display: block;
-}
-
-
-html[data-theme="escuro"]
-.theme-button {
-    color:
-        #aaa196;
-}
-
-
-/* ÍCONES */
+/* ======================================================
+   ÍCONES
+====================================================== */
 
 .icon-svg {
-    display: block;
+    display:
+        block;
 
-    width: 1.2rem;
-    height: 1.2rem;
+    width:
+        1.2rem;
+
+    height:
+        1.2rem;
 }
 
 
-/* VISÃO GERAL */
+/* ======================================================
+   VISÃO GERAL
+====================================================== */
 
 .dashboard-summary {
     margin-bottom:
@@ -430,12 +576,16 @@ html[data-theme="escuro"]
 
 
 .summary-grid {
-    display: grid;
+    display:
+        grid;
 
     grid-template-columns:
         repeat(
             auto-fit,
-            minmax(10rem, 1fr)
+            minmax(
+                10rem,
+                1fr
+            )
         );
 
     gap:
@@ -445,7 +595,8 @@ html[data-theme="escuro"]
 
 .progress-summary,
 .summary-card {
-    min-width: 0;
+    min-width:
+        0;
 
     min-height:
         5.4rem;
@@ -464,40 +615,338 @@ html[data-theme="escuro"]
         var(--color-surface);
 
     box-shadow:
-        0 0.12rem 0.3rem
+        0
+        0.12rem
+        0.3rem
         rgba(0, 0, 0, 0.07);
 }
 
 
+/* ======================================================
+   PROGRESSO
+====================================================== */
+
 .progress-summary {
-    display: flex;
+    position:
+        relative;
 
-    align-items: center;
-
-    justify-content: center;
-
-    gap:
-        0.8rem;
+    display:
+        block;
 
     grid-column:
         span 2;
 }
 
 
-.progress-summary h3 {
-    font-size:
-        1rem;
+.progress-main {
+    display:
+        flex;
 
-    letter-spacing: 0;
+    align-items:
+        center;
 
-    text-transform: none;
+    justify-content:
+        center;
+
+    gap:
+        0.65rem;
+
+    padding-right:
+        2.2rem;
 }
 
 
-.summary-card {
-    display: flex;
+.progress-text {
+    min-width:
+        7rem;
+}
 
-    align-items: center;
+
+.progress-text h3 {
+    margin-bottom:
+        0.15rem;
+
+    font-size:
+        1rem;
+
+    letter-spacing:
+        0;
+
+    text-transform:
+        none;
+}
+
+
+.progress-text p {
+    max-width:
+        11rem;
+
+    margin:
+        0;
+
+    color:
+        var(--color-muted);
+
+    font-size:
+        0.76rem;
+
+    line-height:
+        1.3;
+}
+
+
+/* ======================================================
+   CÍRCULO DE PROGRESSO
+====================================================== */
+
+.progress-circle {
+    --progress:
+        0deg;
+
+    flex:
+        0 0 auto;
+
+    display:
+        grid;
+
+    width:
+        4.8rem;
+
+    height:
+        4.8rem;
+
+    place-items:
+        center;
+
+    border-radius:
+        50%;
+
+    background:
+        conic-gradient(
+            var(--status-done)
+            var(--progress),
+
+            var(--progress-empty)
+            var(--progress)
+        );
+}
+
+
+.progress-circle-inner {
+    display:
+        flex;
+
+    width:
+        3.7rem;
+
+    height:
+        3.7rem;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    border-radius:
+        50%;
+
+    background:
+        var(--color-surface);
+}
+
+
+.progress-circle-inner strong {
+    font-size:
+        1.15rem;
+}
+
+
+/* ======================================================
+   PLANTA
+====================================================== */
+
+.progress-plant {
+    flex:
+        0 0 auto;
+
+    display:
+        grid;
+
+    width:
+        3.7rem;
+
+    height:
+        3.7rem;
+
+    place-items:
+        center;
+}
+
+
+.plant-svg {
+    width:
+        3.15rem;
+
+    height:
+        3.15rem;
+}
+
+
+.plant-pot {
+    fill:
+        var(--plant-pot);
+}
+
+
+.plant-stem {
+    fill:
+        none;
+
+    stroke:
+        var(--plant-green);
+
+    stroke-width:
+        3;
+
+    stroke-linecap:
+        round;
+
+    opacity:
+        0;
+
+    transform:
+        scaleY(0);
+
+    transform-origin:
+        center bottom;
+
+    transition:
+        opacity 0.3s ease,
+        transform 0.4s ease;
+}
+
+
+.plant-stem.visible {
+    opacity:
+        1;
+
+    transform:
+        scaleY(1);
+}
+
+
+.plant-leaf {
+    fill:
+        var(--plant-green);
+
+    opacity:
+        0;
+
+    transform:
+        scale(0);
+
+    transform-origin:
+        center;
+
+    transition:
+        opacity 0.35s ease,
+        transform 0.35s ease;
+}
+
+
+.plant-leaf.visible {
+    opacity:
+        1;
+
+    transform:
+        scale(1);
+}
+
+
+/* BOTÃO DA PLANTA */
+
+.plant-phases-button {
+    position:
+        absolute;
+
+    top:
+        0.6rem;
+
+    right:
+        0.55rem;
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    width:
+        2rem;
+
+    min-width:
+        2rem;
+
+    height:
+        2rem;
+
+    min-height:
+        2rem;
+
+    padding:
+        0;
+
+    border:
+        0.1rem solid
+        #8aaa7e;
+
+    border-radius:
+        50%;
+
+    background:
+        #e7f0e0;
+
+    color:
+        #4a724d;
+}
+
+
+.plant-phases-button svg {
+    width:
+        1rem;
+
+    height:
+        1rem;
+}
+
+
+html[data-theme="escuro"]
+.plant-phases-button {
+    border-color:
+        #58755a;
+
+    background:
+        #304231;
+
+    color:
+        #9fc69e;
+}
+
+
+/* ======================================================
+   CARDS DO RESUMO
+====================================================== */
+
+.summary-card {
+    display:
+        flex;
+
+    align-items:
+        center;
 
     gap:
         0.7rem;
@@ -505,16 +954,23 @@ html[data-theme="escuro"]
 
 
 .summary-icon {
-    flex: 0 0 auto;
+    flex:
+        0 0 auto;
 
-    display: inline-flex;
+    display:
+        inline-flex;
 
-    align-items: center;
+    align-items:
+        center;
 
-    justify-content: center;
+    justify-content:
+        center;
 
-    width: 2.5rem;
-    height: 2.5rem;
+    width:
+        2.5rem;
+
+    height:
+        2.5rem;
 
     border:
         0.08rem solid
@@ -532,11 +988,14 @@ html[data-theme="escuro"]
 
 
 .summary-content {
-    min-width: 0;
+    min-width:
+        0;
 
-    display: flex;
+    display:
+        flex;
 
-    flex-direction: column;
+    flex-direction:
+        column;
 }
 
 
@@ -550,7 +1009,8 @@ html[data-theme="escuro"]
     font-size:
         1.7rem;
 
-    line-height: 1;
+    line-height:
+        1;
 }
 
 
@@ -563,57 +1023,9 @@ html[data-theme="escuro"]
 }
 
 
-/* PROGRESSO CIRCULAR */
-
-.progress-circle {
-    --progress: 0deg;
-
-    flex: 0 0 auto;
-
-    display: grid;
-
-    width: 5.2rem;
-    height: 5.2rem;
-
-    place-items: center;
-
-    border-radius: 50%;
-
-    background:
-        conic-gradient(
-            var(--status-done)
-            var(--progress),
-
-            var(--progress-empty)
-            var(--progress)
-        );
-}
-
-
-.progress-circle-inner {
-    display: flex;
-
-    width: 4rem;
-    height: 4rem;
-
-    align-items: center;
-
-    justify-content: center;
-
-    border-radius: 50%;
-
-    background:
-        var(--color-surface);
-}
-
-
-.progress-circle-inner strong {
-    font-size:
-        1.25rem;
-}
-
-
-/* FILTROS */
+/* ======================================================
+   FILTROS
+====================================================== */
 
 .filters-panel,
 .board-section {
@@ -623,9 +1035,11 @@ html[data-theme="escuro"]
 
 
 .filters-heading {
-    display: flex;
+    display:
+        flex;
 
-    align-items: center;
+    align-items:
+        center;
 
     margin-bottom:
         var(--space-medium);
@@ -633,9 +1047,11 @@ html[data-theme="escuro"]
 
 
 .filters-title-group {
-    display: flex;
+    display:
+        flex;
 
-    align-items: center;
+    align-items:
+        center;
 
     gap:
         0.6rem;
@@ -643,24 +1059,35 @@ html[data-theme="escuro"]
 
 
 .filters-title-group h2 {
-    margin-bottom: 0;
+    margin-bottom:
+        0;
 }
 
 
 .filters-toggle {
-    display: inline-flex;
+    display:
+        inline-flex;
 
-    align-items: center;
+    align-items:
+        center;
 
-    justify-content: center;
+    justify-content:
+        center;
 
-    width: 2.7rem;
-    min-width: 2.7rem;
+    width:
+        2.7rem;
 
-    height: 2.7rem;
-    min-height: 2.7rem;
+    min-width:
+        2.7rem;
 
-    padding: 0;
+    height:
+        2.7rem;
+
+    min-height:
+        2.7rem;
+
+    padding:
+        0;
 
     border:
         0.1rem solid
@@ -675,31 +1102,29 @@ html[data-theme="escuro"]
     color:
         var(--color-text);
 
-    cursor: pointer;
-}
-
-
-.filters-toggle:hover {
-    background:
-        var(--color-background);
-
-    filter: none;
+    cursor:
+        pointer;
 }
 
 
 .notebook-icon {
-    width: 1.3rem;
-    height: 1.3rem;
+    width:
+        1.3rem;
+
+    height:
+        1.3rem;
 }
 
 
 [data-conteudo-filtros][hidden] {
-    display: none;
+    display:
+        none;
 }
 
 
 .filters-grid {
-    margin: 0;
+    margin:
+        0;
 
     padding:
         var(--space-medium);
@@ -723,7 +1148,8 @@ html[data-theme="escuro"]
 
 
 .form-field label {
-    display: block;
+    display:
+        block;
 
     margin-bottom:
         0.35rem;
@@ -733,21 +1159,28 @@ html[data-theme="escuro"]
 }
 
 
+/* ======================================================
+   FORMULÁRIO
+====================================================== */
+
 input,
 select,
 button {
-    min-width: 0;
+    min-width:
+        0;
 
     min-inline-size:
         2.75rem;
 
-    width: 100%;
+    width:
+        100%;
 
     min-height:
         2.75rem;
 
     padding:
-        0.65rem 0.75rem;
+        0.65rem
+        0.75rem;
 
     border:
         0.1rem solid
@@ -777,7 +1210,8 @@ button {
     color:
         var(--color-background);
 
-    cursor: pointer;
+    cursor:
+        pointer;
 
     font-weight:
         700;
@@ -812,19 +1246,24 @@ button:hover {
 
 
 .form-actions {
-    display: flex;
+    display:
+        flex;
 
-    flex-direction: column;
+    flex-direction:
+        column;
 
     gap:
         var(--space-small);
 }
 
 
-/* QUADRO */
+/* ======================================================
+   QUADRO
+====================================================== */
 
 .task-board {
-    display: grid;
+    display:
+        grid;
 
     grid-template-columns:
         repeat(
@@ -841,11 +1280,14 @@ button:hover {
 
 
 .status-column {
-    min-width: 0;
+    min-width:
+        0;
 
-    display: flex;
+    display:
+        flex;
 
-    flex-direction: column;
+    flex-direction:
+        column;
 
     padding:
         var(--space-medium);
@@ -889,10 +1331,16 @@ button:hover {
 }
 
 
-.status-title-row {
-    display: flex;
+/* ======================================================
+   TÍTULO DAS COLUNAS
+====================================================== */
 
-    align-items: center;
+.status-title-row {
+    display:
+        flex;
+
+    align-items:
+        center;
 
     justify-content:
         space-between;
@@ -906,11 +1354,14 @@ button:hover {
 
 
 .status-label {
-    min-width: 0;
+    min-width:
+        0;
 
-    display: flex;
+    display:
+        flex;
 
-    align-items: center;
+    align-items:
+        center;
 
     gap:
         0.55rem;
@@ -918,18 +1369,23 @@ button:hover {
 
 
 .status-icon {
-    flex: 0 0 auto;
+    flex:
+        0 0 auto;
 
-    display: inline-flex;
+    display:
+        inline-flex;
 
-    align-items: center;
+    align-items:
+        center;
 
-    justify-content: center;
+    justify-content:
+        center;
 
-    width: 2rem;
-    height: 2rem;
+    width:
+        2rem;
 
-    border-radius: 50%;
+    height:
+        2rem;
 }
 
 
@@ -958,10 +1414,12 @@ button:hover {
 
 
 .status-percent {
-    flex: 0 0 auto;
+    flex:
+        0 0 auto;
 
     padding:
-        0.18rem 0.55rem;
+        0.18rem
+        0.55rem;
 
     border:
         0.08rem solid
@@ -981,18 +1439,22 @@ button:hover {
 }
 
 
-/* BARRAS */
+/* ======================================================
+   BARRAS
+====================================================== */
 
 .status-progressbar {
-    position: relative;
+    width:
+        100%;
 
-    width: 100%;
-    height: 0.8rem;
+    height:
+        0.8rem;
 
     margin-bottom:
         var(--space-medium);
 
-    overflow: hidden;
+    overflow:
+        hidden;
 
     border-radius:
         999px;
@@ -1003,7 +1465,8 @@ button:hover {
 
 
 .status-progressbar-fill {
-    height: 100%;
+    height:
+        100%;
 
     border-radius:
         inherit;
@@ -1012,7 +1475,8 @@ button:hover {
 
 .status-todo
 .status-progressbar-fill {
-    width: 0%;
+    width:
+        0%;
 
     background:
         var(--status-todo);
@@ -1021,7 +1485,8 @@ button:hover {
 
 .status-progress
 .status-progressbar-fill {
-    width: 40%;
+    width:
+        40%;
 
     background:
         var(--status-progress);
@@ -1030,7 +1495,8 @@ button:hover {
 
 .status-review
 .status-progressbar-fill {
-    width: 75%;
+    width:
+        75%;
 
     background:
         var(--status-review);
@@ -1039,52 +1505,69 @@ button:hover {
 
 .status-done
 .status-progressbar-fill {
-    width: 100%;
+    width:
+        100%;
 
     background:
         var(--status-done);
 }
 
 
-/* CARTÕES */
+/* ======================================================
+   CARTÕES
+====================================================== */
 
 .task-list {
-    min-width: 0;
+    min-width:
+        0;
 
-    display: flex;
+    display:
+        flex;
 
-    flex: 1;
+    flex:
+        1;
 
-    flex-direction: column;
+    flex-direction:
+        column;
 
     gap:
         var(--space-small);
 
-    margin: 0;
+    margin:
+        0;
 
-    padding: 0;
+    padding:
+        0;
 
-    list-style: none;
+    list-style:
+        none;
 }
 
 
 .task-list > li {
-    min-width: 0;
+    min-width:
+        0;
 
-    display: flex;
+    display:
+        flex;
 
-    flex: 1;
+    flex:
+        1;
 }
 
 
 .task-card {
-    min-width: 0;
+    min-width:
+        0;
 
-    display: flex;
+    display:
+        flex;
 
-    flex: 1;
+    flex:
+        1;
 
-    flex-direction: column;
+    flex-direction:
+        column;
 
     padding:
         var(--space-medium);
@@ -1107,8 +1590,7 @@ button:hover {
 
     transition:
         transform 0.2s ease,
-        box-shadow 0.2s ease,
-        background 0.25s ease;
+        box-shadow 0.2s ease;
 }
 
 
@@ -1118,15 +1600,19 @@ button:hover {
         scale(1.01);
 
     box-shadow:
-        0 0.5rem 1rem
+        0
+        0.5rem
+        1rem
         rgba(0, 0, 0, 0.2);
 }
 
 
 .task-card-header {
-    min-width: 0;
+    min-width:
+        0;
 
-    display: flex;
+    display:
+        flex;
 
     align-items:
         flex-start;
@@ -1140,21 +1626,26 @@ button:hover {
 
 
 .task-card h4 {
-    min-width: 0;
+    min-width:
+        0;
 
-    flex: 1;
+    flex:
+        1;
 
-    margin-bottom: 0;
+    margin-bottom:
+        0;
 
     font-size:
         1.08rem;
 
-    overflow: hidden;
+    overflow:
+        hidden;
 
     text-overflow:
         ellipsis;
 
-    white-space: nowrap;
+    white-space:
+        nowrap;
 }
 
 
@@ -1173,10 +1664,13 @@ button:hover {
 }
 
 
-/* PRIORIDADES */
+/* ======================================================
+   PRIORIDADES
+====================================================== */
 
 .priority {
-    flex: 0 0 auto;
+    flex:
+        0 0 auto;
 
     display:
         inline-flex;
@@ -1188,10 +1682,12 @@ button:hover {
         1.6rem;
 
     padding:
-        0.25rem 0.6rem;
+        0.25rem
+        0.6rem;
 
     border:
-        0.1rem solid transparent;
+        0.1rem solid
+        transparent;
 
     border-radius:
         999px;
@@ -1285,7 +1781,9 @@ html[data-theme="escuro"]
 }
 
 
-/* DESCRIÇÃO E PRAZO */
+/* ======================================================
+   DESCRIÇÃO / PRAZO
+====================================================== */
 
 .task-description {
     margin-bottom:
@@ -1315,7 +1813,9 @@ html[data-theme="escuro"]
 }
 
 
-/* BOTÃO VER DETALHES */
+/* ======================================================
+   VER DETALHES
+====================================================== */
 
 .task-card button {
     align-self:
@@ -1334,43 +1834,504 @@ html[data-theme="escuro"]
         0.4rem;
 
     padding:
-        0.35rem 0.8rem;
+        0.35rem
+        0.8rem;
 
     font-size:
         0.8rem;
 }
 
 
-.task-card button:hover {
-    transform:
-        translateY(-1px);
+/* ======================================================
+   RODAPÉ COM PLAQUINHA
+====================================================== */
 
-    opacity:
-        0.9;
+.footer-area {
+    display:
+        flex;
+
+    justify-content:
+        center;
+
+    padding:
+        1.5rem
+        1rem
+        2.2rem;
 }
 
 
-/* FOOTER */
+.footer-board {
+    position:
+        relative;
 
-body > footer {
+    width:
+        fit-content;
+
+    max-width:
+        100%;
+
     padding:
-        var(--space-large);
+        0.7rem
+        1.35rem;
+
+    border:
+        0.12rem solid
+        var(--wood-plaque-dark);
+
+    border-radius:
+        0.6rem;
 
     background:
-        var(--color-header);
+        var(--wood-plaque);
 
     color:
-        var(--color-header-text);
+        #fffaf0;
+
+    text-align:
+        center;
+
+    box-shadow:
+        0.18rem
+        0.2rem
+        0
+        var(--wood-plaque-dark);
+
+    transition:
+        background 0.25s ease,
+        border-color 0.25s ease;
 }
 
 
-body > footer p {
-    margin-bottom:
+.footer-board p {
+    margin:
         0;
+
+    font-size:
+        0.85rem;
 }
 
 
-/* RESPONSIVO */
+/* PARAFUSOS DA PLAQUINHA */
+
+.footer-board::before,
+.footer-board::after {
+    content:
+        "";
+
+    position:
+        absolute;
+
+    top:
+        50%;
+
+    width:
+        0.3rem;
+
+    height:
+        0.3rem;
+
+    border-radius:
+        50%;
+
+    background:
+        #d0a177;
+
+    transform:
+        translateY(-50%);
+}
+
+
+.footer-board::before {
+    left:
+        0.45rem;
+}
+
+
+.footer-board::after {
+    right:
+        0.45rem;
+}
+
+
+/* ======================================================
+   MODAL
+====================================================== */
+
+.modal[hidden] {
+    display:
+        none;
+}
+
+
+.modal {
+    position:
+        fixed;
+
+    z-index:
+        9999;
+
+    inset:
+        0;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    padding:
+        1rem;
+}
+
+
+.modal-overlay {
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    background:
+        rgba(
+            24,
+            21,
+            18,
+            0.58
+        );
+
+    backdrop-filter:
+        blur(2px);
+}
+
+
+.modal-content {
+    position:
+        relative;
+
+    z-index:
+        1;
+
+    width:
+        min(
+            92vw,
+            28rem
+        );
+
+    max-height:
+        82vh;
+
+    overflow-y:
+        auto;
+
+    margin:
+        0;
+
+    padding:
+        1.2rem;
+
+    border:
+        0.1rem solid
+        var(--color-border);
+
+    border-radius:
+        0.85rem;
+
+    background:
+        var(--color-surface);
+
+    color:
+        var(--color-text);
+
+    box-shadow:
+        0
+        1rem
+        2.5rem
+        rgba(0, 0, 0, 0.3);
+}
+
+
+/* MODAL DA PLANTA */
+
+.modal[data-modal-tipo="planta"]
+.modal-content {
+    width:
+        min(
+            92vw,
+            23rem
+        );
+
+    padding:
+        1rem;
+}
+
+
+/* MODAL DA TAREFA */
+
+.modal[data-modal-tipo="tarefa"]
+.modal-content {
+    width:
+        min(
+            92vw,
+            29rem
+        );
+}
+
+
+.modal-title {
+    margin-bottom:
+        1rem;
+
+    padding-right:
+        2.3rem;
+
+    font-size:
+        1.15rem;
+
+    letter-spacing:
+        0;
+
+    text-transform:
+        none;
+}
+
+
+.modal-close {
+    position:
+        absolute;
+
+    top:
+        0.55rem;
+
+    right:
+        0.55rem;
+
+    display:
+        inline-flex;
+
+    width:
+        2rem;
+
+    min-width:
+        2rem;
+
+    height:
+        2rem;
+
+    min-height:
+        2rem;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    padding:
+        0;
+
+    border-radius:
+        50%;
+
+    font-size:
+        1.2rem;
+
+    line-height:
+        1;
+}
+
+
+/* ======================================================
+   FASES DA PLANTA
+====================================================== */
+
+.plant-stages {
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    gap:
+        0.45rem;
+}
+
+
+.plant-stage {
+    display:
+        grid;
+
+    grid-template-columns:
+        3rem
+        5.1rem
+        1fr;
+
+    min-height:
+        3.3rem;
+
+    align-items:
+        center;
+
+    gap:
+        0.55rem;
+
+    padding:
+        0.4rem
+        0.55rem;
+
+    border:
+        0.08rem solid
+        var(--color-border);
+
+    border-radius:
+        0.55rem;
+
+    background:
+        var(--color-background);
+}
+
+
+.plant-stage-drawing {
+    display:
+        grid;
+
+    place-items:
+        center;
+}
+
+
+.plant-stage-drawing svg {
+    display:
+        block;
+
+    width:
+        2.75rem;
+
+    height:
+        2.75rem;
+}
+
+
+.plant-stage-info {
+    display:
+        contents;
+}
+
+
+.plant-stage-info strong {
+    font-size:
+        0.76rem;
+}
+
+
+.plant-stage-info span {
+    color:
+        var(--color-muted);
+
+    font-size:
+        0.78rem;
+}
+
+
+.plant-seed {
+    fill:
+        #83583c;
+}
+
+
+.stage-pot {
+    fill:
+        var(--plant-pot);
+}
+
+
+.stage-stem {
+    fill:
+        none;
+
+    stroke:
+        var(--plant-green);
+
+    stroke-width:
+        3;
+
+    stroke-linecap:
+        round;
+}
+
+
+.stage-leaf {
+    fill:
+        var(--plant-green);
+}
+
+
+/* ======================================================
+   DETALHES DA TAREFA
+====================================================== */
+
+.task-modal-description {
+    margin-bottom:
+        1rem;
+
+    color:
+        var(--color-muted);
+
+    line-height:
+        1.55;
+}
+
+
+.task-modal-list {
+    display:
+        grid;
+
+    grid-template-columns:
+        auto
+        1fr;
+
+    gap:
+        0.55rem
+        1rem;
+
+    margin:
+        0;
+
+    padding:
+        0.9rem;
+
+    border:
+        0.1rem solid
+        var(--color-border);
+
+    border-radius:
+        0.65rem;
+
+    background:
+        var(--color-background);
+}
+
+
+.task-modal-list dt {
+    font-weight:
+        700;
+}
+
+
+.task-modal-list dd {
+    margin:
+        0;
+
+    color:
+        var(--color-muted);
+}
+
+
+/* ======================================================
+   RESPONSIVO
+====================================================== */
 
 @media (min-width: 48rem) {
 
@@ -1387,7 +2348,10 @@ body > footer p {
         grid-template-columns:
             repeat(
                 4,
-                minmax(0, 1fr)
+                minmax(
+                    0,
+                    1fr
+                )
             );
 
         align-items:
@@ -1429,18 +2393,70 @@ body > footer p {
 
 @media (max-width: 40rem) {
 
-    .header-content {
-        flex-direction:
-            column;
+    .site-header {
+        min-height:
+            10.5rem;
 
-        align-items:
-            flex-start;
+        padding:
+            0.9rem
+            1rem
+            4.7rem;
     }
 
 
-    .header-actions {
-        align-self:
-            flex-end;
+    .header-top {
+        min-height:
+            4rem;
+    }
+
+
+    .header-title-board {
+        width:
+            min(
+                calc(100% - 3.4rem),
+                19rem
+            );
+
+        padding:
+            0.7rem
+            1rem;
+    }
+
+
+    h1 {
+        font-size:
+            clamp(
+                1.45rem,
+                1.2rem + 2vw,
+                1.9rem
+            );
+    }
+
+
+    .theme-button {
+        top:
+            0;
+
+        right:
+            0;
+
+        width:
+            2.5rem;
+
+        min-width:
+            2.5rem;
+
+        height:
+            2.5rem;
+
+        min-height:
+            2.5rem;
+    }
+
+
+    .summary-grid {
+        grid-template-columns:
+            1fr;
     }
 
 
@@ -1450,8 +2466,126 @@ body > footer p {
     }
 
 
-    .summary-grid {
+    .progress-main {
+        justify-content:
+            flex-start;
+
+        padding-right:
+            2rem;
+    }
+
+
+    .progress-circle {
+        width:
+            4.3rem;
+
+        height:
+            4.3rem;
+    }
+
+
+    .progress-circle-inner {
+        width:
+            3.3rem;
+
+        height:
+            3.3rem;
+    }
+
+
+    .progress-plant {
+        width:
+            3.2rem;
+
+        height:
+            3.2rem;
+    }
+
+
+    .plant-svg {
+        width:
+            2.8rem;
+
+        height:
+            2.8rem;
+    }
+
+
+    .footer-area {
+        padding:
+            1.2rem
+            1rem
+            1.8rem;
+    }
+
+
+    .footer-board {
+        padding:
+            0.65rem
+            1.1rem;
+    }
+
+
+    .footer-board p {
+        font-size:
+            0.76rem;
+    }
+
+
+    .modal-content {
+        width:
+            min(
+                94vw,
+                27rem
+            );
+
+        max-height:
+            80vh;
+    }
+
+
+    .modal[data-modal-tipo="planta"]
+    .modal-content {
+        width:
+            min(
+                92vw,
+                21rem
+            );
+    }
+
+
+    .plant-stage {
+        grid-template-columns:
+            2.7rem
+            4.7rem
+            1fr;
+
+        gap:
+            0.4rem;
+
+        padding:
+            0.35rem
+            0.45rem;
+    }
+
+
+    .plant-stage-drawing svg {
+        width:
+            2.4rem;
+
+        height:
+            2.4rem;
+    }
+
+
+    .task-modal-list {
         grid-template-columns:
             1fr;
+    }
+
+
+    .task-modal-list dt {
+        margin-bottom:
+            -0.4rem;
     }
 }
